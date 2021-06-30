@@ -1,0 +1,51 @@
+.dialogs {
+    display: grid;
+    grid-template-columns: 2fr 10fr;
+
+}
+
+.dialogItems {
+    padding: 10px;
+}
+
+.dialogItems .active {
+    color: yellow;
+}
+
+.dialogItems a {
+    text-decoration: none;
+}
+
+.dialogItems .avatar {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    border-radius: 25px;
+    border: 1px solid white;
+}
+
+.messages {
+    padding: 10px;
+}
+
+.messages .message {
+    max-width: 350px;
+    border: 1px solid black;
+    background-color: beige;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px;
+    word-wrap: break-word;
+}
+
+/*
+.messages .messageLeft {
+    margin-right: auto;
+    text-align: left;
+}
+*/
+
+.messages .messageRight {
+    margin-left: auto;
+    text-align: right;
+}
