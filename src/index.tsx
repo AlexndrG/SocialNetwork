@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import {BrowserRouter} from 'react-router-dom';
+import {HashRouter} from 'react-router-dom';
 import {App} from './App';
 import {StateType, store} from './redux/state';
 
@@ -10,7 +10,7 @@ import {StateType, store} from './redux/state';
 const rendererEntireTree = (state: StateType) => {
     ReactDOM.render(
         <React.StrictMode>
-            <BrowserRouter>
+            <HashRouter>
                 <App
                     state={state}
                     addPost={store.addPost.bind(store)}
@@ -18,7 +18,7 @@ const rendererEntireTree = (state: StateType) => {
                     addMessage={store.addMessage.bind(store)}
                     updateNewMessageText={store.updateNewMessageText.bind(store)}
                 />
-            </BrowserRouter>
+            </HashRouter>
         </React.StrictMode>,
         document.getElementById('root')
     );
