@@ -34,6 +34,28 @@ export type StateType = {
 }
 
 
+type ActionTypeAddPost = {
+    type: 'ADD-POST'
+}
+type ActionTypeUpdateNewPostText = {
+    type: 'UPDATE-NEW-POST-TEXT'
+    newText: string
+}
+type ActionTypeAddMessage = {
+    type: 'ADD-MESSAGE'
+}
+type ActionTypeUpdateNewMessageText = {
+    type: 'UPDATE-NEW-MESSAGE-TEXT'
+    newText: string
+}
+//=======================================
+export type ActionType =
+    ActionTypeAddPost |
+    ActionTypeUpdateNewPostText |
+    ActionTypeAddMessage |
+    ActionTypeUpdateNewMessageText
+
+
 
 export type StoreType = {
     _state: StateType
@@ -41,13 +63,14 @@ export type StoreType = {
     _callSubscriber: (state: StateType) => void
     subscribe: (observer: (state: StateType) => void) => void
 
-    addPost: () => void
-    updateNewPostText: (newText: string) => void
-
-    addMessage: () => void
-    updateNewMessageText: (newText: string) => void
-
     getState: () => StateType
+
+    // addPost: () => void
+    // updateNewPostText: (newText: string) => void
+    // addMessage: () => void
+    // updateNewMessageText: (newText: string) => void
+
+    dispatch: (action: ActionType) => void
 }
 
 
@@ -67,11 +90,23 @@ export const store: StoreType = {
         dialogsPage: {
             dialogs: [
                 {id: 1, name: 'Dimych', avatar: 'https://image.flaticon.com/icons/png/512/147/147144.png'},
-                {id: 2, name: 'Andrey', avatar: 'https://3dtoday.ru/upload/users/avatars/sIN8UsnRj2kXjxP6aU6Qth56TKVsssiXdwYnaXNa.png'},
+                {
+                    id: 2,
+                    name: 'Andrey',
+                    avatar: 'https://3dtoday.ru/upload/users/avatars/sIN8UsnRj2kXjxP6aU6Qth56TKVsssiXdwYnaXNa.png'
+                },
                 {id: 3, name: 'Sveta', avatar: 'https://image.flaticon.com/icons/png/512/146/146005.png'},
-                {id: 4, name: 'Sasha', avatar: 'https://i.pinimg.com/originals/7c/c7/a6/7cc7a630624d20f7797cb4c8e93c09c1.png'},
+                {
+                    id: 4,
+                    name: 'Sasha',
+                    avatar: 'https://i.pinimg.com/originals/7c/c7/a6/7cc7a630624d20f7797cb4c8e93c09c1.png'
+                },
                 {id: 5, name: 'Victor', avatar: 'https://image.flaticon.com/icons/png/512/146/146007.png'},
-                {id: 6, name: 'Valera', avatar: 'https://cdn.iconscout.com/icon/free/png-256/astonishes-boy-1129046.png'}
+                {
+                    id: 6,
+                    name: 'Valera',
+                    avatar: 'https://cdn.iconscout.com/icon/free/png-256/astonishes-boy-1129046.png'
+                }
             ],
 
             messages: [
@@ -91,18 +126,18 @@ export const store: StoreType = {
 
 
     //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    _callSubscriber(state: StateType) {
+    _callSubscriber(state) {
         console.log('State changed!')
     },
 
     // subscribe (observer: (state: StateType) => void) {
-    subscribe (observer) {
+    subscribe(observer) {
         this._callSubscriber = observer
     },
     //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
+/*
     addPost() {
-debugger
         const newPost: PostsDataType = {
             id: 5,
             message: this._state.profilePage.newPostText,
@@ -114,7 +149,7 @@ debugger
         this._callSubscriber(this._state)
     },
 
-    updateNewPostText(newText: string) {
+    updateNewPostText(newText) {
         this._state.profilePage.newPostText = newText
         this._callSubscriber(this._state)
     },
@@ -133,15 +168,47 @@ debugger
         this._callSubscriber(this._state)
     },
 
-    updateNewMessageText(newText: string) {
+    updateNewMessageText(newText) {
         this._state.dialogsPage.newMessageText = newText
         this._callSubscriber(this._state)
     },
+*/
     //===========================
 
     getState() {
         return this._state
-    }
+    },
+    //===========================
+
+    dispatch(action) { // action -> {type: 'ADD-POST'} или {type: 'UPDATE-NEW-POST-TEXT'} или ...
+        if (action.type === 'ADD-POST') {
+            const newPost: PostsDataType = {
+                id: 5,
+                message: this._state.profilePage.newPostText,
+                likesCount: 0
+            }
+            this._state.profilePage.posts.unshift(newPost)
+            this._state.profilePage.newPostText = ''
+            this._callSubscriber(this._state)
+        } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
+            this._state.profilePage.newPostText = action.newText
+            this._callSubscriber(this._state)
+        } else if (action.type === 'ADD-MESSAGE') {
+            const newMessage: MessagesDataType =
+                {
+                    id: 7,
+                    message: this._state.dialogsPage.newMessageText,
+                    my: true
+                }
+            this._state.dialogsPage.messages.push(newMessage)
+            this._state.dialogsPage.newMessageText = ''
+            this._callSubscriber(this._state)
+        } else if (action.type === 'UPDATE-NEW-MESSAGE-TEXT') {
+            this._state.dialogsPage.newMessageText = action.newText
+            this._callSubscriber(this._state)
+        }
+    },
+
 }
 
 
@@ -154,7 +221,6 @@ declare global {
 }
 window.store = store
 //==============================================================
-
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////
