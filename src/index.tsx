@@ -14,6 +14,7 @@ const rendererEntireTree = (state: StateType) => {
                 <App
                     state={state}
                     dispatch={store.dispatch.bind(store)}
+                    store={store}
                 />
             </HashRouter>
         </React.StrictMode>,
