@@ -1,3 +1,8 @@
+const ADD_POST = 'ADD-POST'
+const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
+const ADD_MESSAGE = 'ADD-MESSAGE'
+const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT'
+
 export type DialogsDataType = {
     id: number
     name: string
@@ -34,29 +39,6 @@ export type StateType = {
 }
 
 
-type ActionTypeAddPost = {
-    type: 'ADD-POST'
-}
-type ActionTypeUpdateNewPostText = {
-    type: 'UPDATE-NEW-POST-TEXT'
-    newText: string
-}
-type ActionTypeAddMessage = {
-    type: 'ADD-MESSAGE'
-}
-type ActionTypeUpdateNewMessageText = {
-    type: 'UPDATE-NEW-MESSAGE-TEXT'
-    newText: string
-}
-//=======================================
-export type ActionType =
-    ActionTypeAddPost |
-    ActionTypeUpdateNewPostText |
-    ActionTypeAddMessage |
-    ActionTypeUpdateNewMessageText
-
-
-
 export type StoreType = {
     _state: StateType
 
@@ -70,7 +52,7 @@ export type StoreType = {
     // addMessage: () => void
     // updateNewMessageText: (newText: string) => void
 
-    dispatch: (action: ActionType) => void
+    dispatch: (action: ActionsTypes) => void
 }
 
 
@@ -136,43 +118,43 @@ export const store: StoreType = {
     },
     //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-/*
-    addPost() {
-        const newPost: PostsDataType = {
-            id: 5,
-            message: this._state.profilePage.newPostText,
-            likesCount: 0
-        }
-
-        this._state.profilePage.posts.unshift(newPost)
-        this._state.profilePage.newPostText = ''
-        this._callSubscriber(this._state)
-    },
-
-    updateNewPostText(newText) {
-        this._state.profilePage.newPostText = newText
-        this._callSubscriber(this._state)
-    },
-    //===========================
-
-    addMessage() {
-        const newMessage: MessagesDataType =
-            {
-                id: 7,
-                message: this._state.dialogsPage.newMessageText,
-                my: true
+    /*
+        addPost() {
+            const newPost: PostsDataType = {
+                id: 5,
+                message: this._state.profilePage.newPostText,
+                likesCount: 0
             }
 
-        this._state.dialogsPage.messages.push(newMessage)
-        this._state.dialogsPage.newMessageText = ''
-        this._callSubscriber(this._state)
-    },
+            this._state.profilePage.posts.unshift(newPost)
+            this._state.profilePage.newPostText = ''
+            this._callSubscriber(this._state)
+        },
 
-    updateNewMessageText(newText) {
-        this._state.dialogsPage.newMessageText = newText
-        this._callSubscriber(this._state)
-    },
-*/
+        updateNewPostText(newText) {
+            this._state.profilePage.newPostText = newText
+            this._callSubscriber(this._state)
+        },
+        //===========================
+
+        addMessage() {
+            const newMessage: MessagesDataType =
+                {
+                    id: 7,
+                    message: this._state.dialogsPage.newMessageText,
+                    my: true
+                }
+
+            this._state.dialogsPage.messages.push(newMessage)
+            this._state.dialogsPage.newMessageText = ''
+            this._callSubscriber(this._state)
+        },
+
+        updateNewMessageText(newText) {
+            this._state.dialogsPage.newMessageText = newText
+            this._callSubscriber(this._state)
+        },
+    */
     //===========================
 
     getState() {
@@ -212,6 +194,92 @@ export const store: StoreType = {
 }
 
 
+//
+// type addPostActionType = {
+//     type: 'ADD-POST'
+// }
+//
+// можно переделать так, чтобы тип выбирался TypeScript'ом по данным возврата из функции
+//
+/////// type addPostActionType = ReturnType<typeof addPostActionCreator>
+
+
+// type updateNewPostTextActionType = {
+//     type: 'UPDATE-NEW-POST-TEXT'
+//     newText: string
+// }
+//
+/////// type updateNewPostTextActionType = ReturnType<typeof updateNewPostTextActionCreator>
+
+
+// type addMessageActionType = {
+//     type: 'ADD-MESSAGE'
+// }
+//
+/////// type addMessageActionType = ReturnType<typeof addMessageActionCreator>
+
+// type updateNewMessageTextActionType = {
+//     type: 'UPDATE-NEW-MESSAGE-TEXT'
+//     newText: string
+// }
+//
+/////// type updateNewMessageTextActionType = ReturnType<typeof updateNewMessageTextActionCreator>
+
+//=======================================
+/*
+export type ActionsTypes =
+    addPostActionType |
+    updateNewPostTextActionType |
+    addMessageActionType |
+    updateNewMessageTextActionType
+*/
+export type ActionsTypes =
+    ReturnType<typeof addPostActionCreator> |
+    ReturnType<typeof updateNewPostTextActionCreator> |
+    ReturnType<typeof addMessageActionCreator> |
+    ReturnType<typeof updateNewMessageTextActionCreator>
+
+
+// export const addPostActionCreator = (): addPostActionType => {
+export const addPostActionCreator = () => {
+    return {
+        type: ADD_POST
+    } as const
+}
+
+// export const updateNewPostTextActionCreator = (newText: string): updateNewPostTextActionType => {
+export const updateNewPostTextActionCreator = (newText: string) => {
+    return {
+        type: UPDATE_NEW_POST_TEXT,
+        newText: newText
+    } as const
+}
+
+// export const addMessageActionCreator = (): addMessageActionType => {
+export const addMessageActionCreator = () => {
+    return {
+        type: ADD_MESSAGE
+    } as const
+}
+
+// export const updateNewMessageTextActionCreator = (newText: string): updateNewMessageTextActionType => {
+export const updateNewMessageTextActionCreator = (newText: string) => {
+    return {
+        type: UPDATE_NEW_MESSAGE_TEXT,
+        newText: newText
+    } as const
+}
+
+
+
+
+
+
+
+
+
+//==============================================================
+//==============================================================
 //==============================================================
 declare global {
     interface Window {
@@ -220,6 +288,8 @@ declare global {
     }
 }
 window.store = store
+//==============================================================
+//==============================================================
 //==============================================================
 
 

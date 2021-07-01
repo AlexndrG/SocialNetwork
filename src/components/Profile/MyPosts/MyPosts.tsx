@@ -1,12 +1,12 @@
 import React from 'react';
 import s from './MyPosts.module.css';
 import {Post} from './Posts/Post';
-import {ActionType, PostsDataType} from '../../../redux/state';
+import {ActionsTypes, addPostActionCreator, PostsDataType, updateNewPostTextActionCreator} from '../../../redux/state';
 
 type PropsType = {
     posts: Array<PostsDataType>
     newPostText: string
-    dispatch: (action: ActionType) => void
+    dispatch: (action: ActionsTypes) => void
 }
 
 export const MyPosts = (props: PropsType) => {
@@ -22,7 +22,8 @@ export const MyPosts = (props: PropsType) => {
 
     const addPost = () => {
         // props.addPost()
-        props.dispatch({type: 'ADD-POST'})
+        // props.dispatch({type: 'ADD-POST'})
+        props.dispatch(addPostActionCreator())
         // props.updateNewPostText('')
         newPostElement.current?.focus()     // это аналогично: newPostElement.current && newPostElement.current.focus()
     }
@@ -30,7 +31,8 @@ export const MyPosts = (props: PropsType) => {
     const onPostChange = () => {
         if (newPostElement.current) {
             // props.updateNewPostText(newPostElement.current.value)
-            props.dispatch({type: 'UPDATE-NEW-POST-TEXT', newText: newPostElement.current.value})
+            // props.dispatch({type: 'UPDATE-NEW-POST-TEXT', newText: newPostElement.current.value})
+            props.dispatch(updateNewPostTextActionCreator(newPostElement.current.value))
         }
     }
 
