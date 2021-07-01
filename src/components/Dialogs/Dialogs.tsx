@@ -4,9 +4,9 @@ import s from './Dialogs.module.css';
 import {Message} from './Message/Message';
 import {
     ActionsTypes,
-    sendMessageCreator,
-    updateNewMessageBodyCreator, StoreType
+    StoreType
 } from '../../redux/state';
+import {sendMessageCreator, updateNewMessageBodyCreator} from '../../redux/dialogs-reducer';
 
 type PropsType = {
     store: StoreType
