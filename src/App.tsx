@@ -8,12 +8,14 @@ import {News} from './components/News/News';
 import {Music} from './components/Music/Music';
 import {Settings} from './components/Settings/Settings';
 import {Route} from 'react-router-dom';
-import {ActionsTypes, StateType, StoreType} from './redux/state';
+import {ActionsTypes, DialogsPageType, ProfilePageType, SidebarType, StateType, StoreType} from './redux/store';
+import {EmptyObject, Store} from 'redux';
 
 type PropsType = {
     state: StateType
     dispatch: (action: ActionsTypes) => void
-    store: StoreType
+    // store: StoreType
+    store:  Store<EmptyObject & {profilePage: ProfilePageType, dialogsPage: DialogsPageType, sidebar: SidebarType}, ActionsTypes>
 }
 
 export const App = (props: PropsType) => {

@@ -3,13 +3,15 @@ import {DialogItem} from './DialogItem/DialogItem';
 import s from './Dialogs.module.css';
 import {Message} from './Message/Message';
 import {
-    ActionsTypes,
+    ActionsTypes, DialogsPageType, ProfilePageType, SidebarType,
     StoreType
-} from '../../redux/state';
+} from '../../redux/store';
 import {sendMessageCreator, updateNewMessageBodyCreator} from '../../redux/dialogs-reducer';
+import {EmptyObject, Store} from 'redux';
 
 type PropsType = {
-    store: StoreType
+    // store: StoreType
+    store:  Store<EmptyObject & {profilePage: ProfilePageType, dialogsPage: DialogsPageType, sidebar: SidebarType}, ActionsTypes>
     dispatch: (action: ActionsTypes) => void
 }
 

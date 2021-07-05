@@ -4,7 +4,11 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 import {HashRouter} from 'react-router-dom';
 import {App} from './App';
-import {StateType, store} from './redux/state';
+
+// import {store} from './redux/store';
+import { store } from './redux/redux-store';
+
+import {StateType} from './redux/store';
 
 
 const rendererEntireTree = (state: StateType) => {
@@ -24,7 +28,10 @@ const rendererEntireTree = (state: StateType) => {
 
 rendererEntireTree(store.getState())
 
-store.subscribe(rendererEntireTree)
+store.subscribe(() => {
+    const state = store.getState()
+    rendererEntireTree(state)
+})
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
