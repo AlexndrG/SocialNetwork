@@ -13,8 +13,8 @@ type PropsType = {
 
 export const Dialogs = (props: PropsType) => {
     const state = props.dialogsPage
-    const dialogsElements = state.dialogs.map(d => <DialogItem avatar={d.avatar} name={d.name} id={d.id}/>)
-    const messagesElements = state.messages.map(m => <Message message={m.message} my={m.my}/>)
+    const dialogsElements = state.dialogs.map(d => <DialogItem key={d.id} avatar={d.avatar} name={d.name} id={d.id}/>)
+    const messagesElements = state.messages.map(m => <Message key={m.id} message={m.message} my={m.my}/>)
     const newMessageBody = state.newMessageBody
 
     const newMessageElement = React.createRef<HTMLTextAreaElement>()

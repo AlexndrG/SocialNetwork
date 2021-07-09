@@ -11,14 +11,14 @@ type NavbarPropsType = {
 
 export const Navbar = (props: NavbarPropsType) => {
     const friendsElements = props.sidebar.friends.map(
-        f => {
+        (f,i) => {
             let friend = props.dialogsPage.dialogs.find(d => d.id === f)
             if (!friend) {
                 friend = props.dialogsPage.dialogs[0]
             }
             return (
-                <div className={s.avatar}>
-                    <img src={friend.avatar}/>
+                <div key={i} className={s.avatar}>
+                    <img src={friend.avatar} alt={'avatar'}/>
                     <div>{friend.name}</div>
                 </div>
             )
