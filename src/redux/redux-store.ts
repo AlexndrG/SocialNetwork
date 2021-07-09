@@ -3,11 +3,13 @@ import {profileReducer} from './profile-reducer';
 import {dialogsReducer} from './dialogs-reducer';
 import {sidebarReducer} from './sidebar-reducer';
 import {ActionsTypes, DialogsPageType, ProfilePageType, SidebarType } from './store';
+import { usersReducer } from './users-reducer';
 
 const reducers = combineReducers({
     profilePage: profileReducer,
     dialogsPage: dialogsReducer,
-    sidebar: sidebarReducer
+    sidebar: sidebarReducer,
+    usersPage: usersReducer
 })
 
 export let store = createStore(reducers)

@@ -9,13 +9,14 @@ import {store} from './redux/redux-store';
 import {Provider} from 'react-redux';
 
 ReactDOM.render(
-    <React.StrictMode>
+    // из-за этого пользователи отрисовываются 2 раза (урок 49)
+    // <React.StrictMode>
         <HashRouter>
             <Provider store={store}>
                 <App/>
             </Provider>
-        </HashRouter>
-    </React.StrictMode>,
+        </HashRouter>,
+    // </React.StrictMode>,
     document.getElementById('root')
 );
 
