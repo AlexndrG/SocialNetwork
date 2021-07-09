@@ -1,9 +1,8 @@
 import {combineReducers, createStore, EmptyObject, Store} from 'redux';
-import {profileReducer} from './profile-reducer';
-import {dialogsReducer} from './dialogs-reducer';
+import {addPostActionCreator, profileReducer, updateNewPostTextActionCreator} from './profile-reducer';
+import {dialogsReducer, sendMessageCreator, updateNewMessageBodyCreator} from './dialogs-reducer';
 import {sidebarReducer} from './sidebar-reducer';
-import {ActionsTypes, DialogsPageType, ProfilePageType, SidebarType } from './store';
-import { usersReducer } from './users-reducer';
+import {followAC, setUsersAC, unfollowAC, usersReducer} from './users-reducer';
 
 const reducers = combineReducers({
     profilePage: profileReducer,
@@ -11,8 +10,30 @@ const reducers = combineReducers({
     sidebar: sidebarReducer,
     usersPage: usersReducer
 })
-
 export let store = createStore(reducers)
+
+//============================================================================
+
+export type StateType = ReturnType<typeof reducers>
+
+export type ActionsTypes =
+    ReturnType<typeof addPostActionCreator> |
+    ReturnType<typeof updateNewPostTextActionCreator> |
+    ReturnType<typeof sendMessageCreator> |
+    ReturnType<typeof updateNewMessageBodyCreator> |
+    ReturnType<typeof followAC> |
+    ReturnType<typeof unfollowAC> |
+    ReturnType<typeof setUsersAC>
+
+export type DispatchType = (action: ActionsTypes) => void
+
+
+
+
+
+
+
+
 
 //==============================================================
 //==============================================================
@@ -20,7 +41,7 @@ export let store = createStore(reducers)
 declare global {
     interface Window {
         // add you custom properties and methods
-        store: Store<EmptyObject & { profilePage: ProfilePageType; dialogsPage: DialogsPageType; sidebar: SidebarType; }, ActionsTypes>
+        store: typeof store
     }
 }
 window.store = store

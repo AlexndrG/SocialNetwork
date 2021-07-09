@@ -1,15 +1,15 @@
-import {ActionsTypes} from './store';
+import { ActionsTypes } from "./redux-store"
 
 export const FOLLOW = 'FOLLOW'
 export const UNFOLLOW = 'UNFOLLOW'
 export const SET_USERS = 'SET-USERS'
 
-export type LocationType = {
+type LocationType = {
     city: string
     country: string
 }
 
-export type UsersDataType = {
+export type UserDataType = {
     id: number
     followed: boolean
     fullName: string
@@ -18,14 +18,12 @@ export type UsersDataType = {
     photoUrl: string
 }
 
-export type UsersType = Array<UsersDataType>
-
-export type UsersPageType = {
-    users: UsersType
+export type UsersStateType = {
+    users: Array<UserDataType>
 }
 
 
-const initialState: UsersPageType = {
+const initialState: UsersStateType = {
     users:
         [
             // {
@@ -57,7 +55,7 @@ const initialState: UsersPageType = {
 }
 
 
-export const usersReducer = (state: UsersPageType = initialState, action: ActionsTypes): UsersPageType => {
+export const usersReducer = (state: UsersStateType = initialState, action: ActionsTypes): UsersStateType => {
     switch (action.type) {
         case FOLLOW:
             return {
@@ -98,7 +96,7 @@ export const unfollowAC = (userId: number) => {
     } as const
 }
 
-export const setUsersAC = (users: UsersType) => {
+export const setUsersAC = (users: Array<UserDataType>) => {
     return {
         type: SET_USERS,
         users

@@ -1,14 +1,29 @@
 import {connect} from 'react-redux';
-import { Navbar } from './Navbar';
-import {ActionsTypes, StateType} from '../../redux/store';
+import {Navbar} from './Navbar';
+import {DispatchType, StateType} from '../../redux/redux-store';
+import {DialogsStateType} from '../../redux/dialogs-reducer';
+import {SidebarStateType} from '../../redux/sidebar-reducer';
 
-const mapStateToProps = (state: StateType) => {
+
+type NavbarMapStateToPropsType = {
+    dialogsPage: DialogsStateType
+    sidebar: SidebarStateType
+}
+
+type NavbarMapDispatchToProps = {
+}
+
+export type NavbarPropsType = NavbarMapStateToPropsType & NavbarMapDispatchToProps
+
+
+const mapStateToProps = (state: StateType): NavbarMapStateToPropsType => {
     return {
         dialogsPage: state.dialogsPage,
         sidebar: state.sidebar
     }
 }
-const mapDispatchToProps = (dispatch: (action: ActionsTypes) => void) => {
+
+const mapDispatchToProps = (dispatch: DispatchType): NavbarMapDispatchToProps => {
     return {}
 }
 

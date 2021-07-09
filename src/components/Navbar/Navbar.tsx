@@ -1,13 +1,8 @@
 import React from 'react';
 import s from './Navbar.module.css';
 import {NavLink} from 'react-router-dom';
-import {DialogsPageType, SidebarType} from '../../redux/store';
+import { NavbarPropsType } from './NavbarContainer';
 
-
-type NavbarPropsType = {
-    dialogsPage: DialogsPageType
-    sidebar: SidebarType
-}
 
 export const Navbar = (props: NavbarPropsType) => {
     const friendsElements = props.sidebar.friends.map(

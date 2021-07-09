@@ -1,47 +1,30 @@
 import React from 'react';
-import {addPostActionCreator, updateNewPostTextActionCreator} from '../../../redux/profile-reducer';
+import {addPostActionCreator, PostsDataType, updateNewPostTextActionCreator} from '../../../redux/profile-reducer';
 import {MyPosts} from './MyPosts';
 import {connect} from 'react-redux';
-import {ActionsTypes, StateType} from '../../../redux/store';
-//import {StoreContext} from '../../../StoreContext';
+import {DispatchType, StateType} from '../../../redux/redux-store';
 
 
-// export const MyPostsContainer = () => {
-//     return (
-//         <StoreContext.Consumer>
-//             {
-//                 (store) => {
-//
-//                     const state = store.getState()
-//
-//                     const addPost = () => {
-//                         store.dispatch(addPostActionCreator())
-//                     }
-//
-//                     const onPostChange = (text: string) => {
-//                         store.dispatch(updateNewPostTextActionCreator(text))
-//                     }
-//
-//                     return (
-//                         <MyPosts
-//                             addPost={addPost}
-//                             updateNewPostText={onPostChange}
-//                             posts={state.profilePage.posts}
-//                             newPostText={state.profilePage.newPostText}/>
-//                     )
-//                 }
-//             }
-//         </StoreContext.Consumer>
-//     )
-// }
+type MyPostsMapStateToPropsType = {
+    posts: Array<PostsDataType>
+    newPostText: string
+}
 
-const mapStateToProps = (state: StateType) => {
+type MyPostsMapDispatchToProps = {
+    addPost: () => void
+    updateNewPostText: (text: string) => void
+}
+
+export type MyPostsPropsType = MyPostsMapStateToPropsType & MyPostsMapDispatchToProps
+
+
+const mapStateToProps = (state: StateType): MyPostsMapStateToPropsType => {
     return {
-        posts:state.profilePage.posts,
+        posts: state.profilePage.posts,
         newPostText: state.profilePage.newPostText
     }
 }
-const mapDispatchToProps = (dispatch: (action: ActionsTypes) => void) => {
+const mapDispatchToProps = (dispatch: DispatchType): MyPostsMapDispatchToProps => {
     return {
         addPost: () => {
             dispatch(addPostActionCreator())

@@ -1,50 +1,57 @@
 import {sendMessageCreator, updateNewMessageBodyCreator} from './dialogs-reducer';
 import {addPostActionCreator, updateNewPostTextActionCreator} from './profile-reducer';
-import {followAC, setUsersAC, unfollowAC, UsersPageType} from './users-reducer';
+import {followAC, setUsersAC, unfollowAC, UsersStateType} from './users-reducer';
 
-export type DialogsDataType = {
+//zzz
+type DialogsDataType = {
     id: number
     name: string
     avatar: string
 }
 
-export type MessagesDataType = {
+//zzz
+type MessagesDataType = {
     id: number
     message: string
     my: boolean
 }
 
-export type PostsDataType = {
+//zzz
+type PostsDataType = {
     message: string
     likesCount: number
     id: number
 }
 
-export type DialogsPageType = {
+//zzz
+type DialogsPageType = {
     dialogs: Array<DialogsDataType>
     messages: Array<MessagesDataType>
     newMessageBody: string
 }
 
-export type ProfilePageType = {
+//zzz
+type ProfilePageType = {
     posts: Array<PostsDataType>
     newPostText: string
 }
 
-export type SidebarType = {
+//zzz
+type SidebarType = {
     friends: Array<number>
 }
 
 
-export type StateType = {
+//zzz
+type StateType = {
     dialogsPage: DialogsPageType
     profilePage: ProfilePageType
     sidebar: SidebarType
-    usersPage: UsersPageType
+    usersPage: UsersStateType
 }
 
-
-export type ActionsTypes =
+//zzz
+type ActionsTypes =
     ReturnType<typeof addPostActionCreator> |
     ReturnType<typeof updateNewPostTextActionCreator> |
     ReturnType<typeof sendMessageCreator> |
@@ -52,6 +59,7 @@ export type ActionsTypes =
     ReturnType<typeof followAC> |
     ReturnType<typeof unfollowAC> |
     ReturnType<typeof setUsersAC>
+
 
 
 
