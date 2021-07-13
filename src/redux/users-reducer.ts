@@ -9,13 +9,24 @@ type LocationType = {
     country: string
 }
 
+// export type UserDataType = {
+//     id: number
+//     followed: boolean
+//     fullName: string
+//     status: string
+//     location: LocationType
+//     photoUrl: string
+// }
 export type UserDataType = {
-    id: number
-    followed: boolean
-    fullName: string
-    status: string
-    location: LocationType
-    photoUrl: string
+    "name": string
+    "id": number
+    "uniqueUrlName": string
+    "photos": {
+        "small": string
+        "large": string
+    },
+    "status": string
+    "followed": boolean
 }
 
 export type UsersStateType = {
