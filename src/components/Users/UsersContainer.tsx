@@ -1,19 +1,28 @@
 import {connect} from 'react-redux';
 import {Users} from './Users';
-import {followAC, setUsersAC, unfollowAC, UserDataType, UsersStateType} from '../../redux/users-reducer';
+import {
+    followAC,
+    setCurrentPageAC,
+    setTotalUsersCountAC,
+    setUsersAC,
+    unfollowAC,
+    UserDataType
+} from '../../redux/users-reducer';
 import {DispatchType, StateType} from '../../redux/redux-store';
 
-//zzz
-// import {Dispatch} from 'redux';
-
 type UsersMapStateToPropsType = {
-    usersPage: UsersStateType
+    users: Array<UserDataType>
+    pageSize: number
+    totalUserCount: number
+    currentPage: number
 }
 
 type UsersMapDispatchToProps = {
     follow: (userId: number) => void
     unfollow: (userId: number) => void
     setUsers: (users: Array<UserDataType>) => void
+    setCurrentPage: (pageNumber: number) => void
+    setTotalUsersCount: (totalCount: number) => void
 }
 
 export type UsersPropsType = UsersMapStateToPropsType & UsersMapDispatchToProps
@@ -22,17 +31,20 @@ export type UsersPropsType = UsersMapStateToPropsType & UsersMapDispatchToProps
 
 const mapStateToProps = (state: StateType): UsersMapStateToPropsType => {
     return {
-        usersPage: state.usersPage
+        users: state.usersPage.users,
+        pageSize: state.usersPage.pageSize,
+        totalUserCount: state.usersPage.totalUserCount,
+        currentPage: state.usersPage.currentPage,
     }
 }
 
-//zzz
-// const mapDispatchToProps = (dispatch: Dispatch): UsersMapDispatchToProps => {        // без уточнения типов "action"
 const mapDispatchToProps = (dispatch: DispatchType): UsersMapDispatchToProps => {
     return {
         follow: (userId: number) => dispatch(followAC(userId)),
         unfollow: (userId: number) => dispatch(unfollowAC(userId)),
         setUsers: (users: Array<UserDataType>) => dispatch(setUsersAC(users)),
+        setCurrentPage: (pageNumber: number) => dispatch(setCurrentPageAC(pageNumber)),
+        setTotalUsersCount: (totalCount: number) => dispatch(setTotalUsersCountAC(totalCount)),
     }
 }
 
