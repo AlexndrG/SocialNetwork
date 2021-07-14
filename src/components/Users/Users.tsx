@@ -24,12 +24,10 @@ type ResponseType = {
 }
 
 export class Users extends React.Component<UsersPropsType> {
-    constructor(props:UsersPropsType) {
-        super(props)
-
+    componentDidMount() {
         if (this.props.usersPage.users.length === 0) {
             axios.get<ResponseType>('https://social-network.samuraijs.com/api/1.0/users?page=133&count=100').then(response => {
-                props.setUsers(response.data.items)
+                this.props.setUsers(response.data.items)
             })
         }
     }
@@ -43,9 +41,10 @@ export class Users extends React.Component<UsersPropsType> {
                         <span>
                             <img
                                 className={s.userPhoto}
-                                src={!!u.photos.small ? u.photos.small : userPhoto}
+                                src={u.photos.small ? u.photos.small : userPhoto}
                                 alt={'User_photo'}
                             />
+                            {u.photos.large && <img src={u.photos.large} alt={'User_photo'}/>}
 
                             {u.followed
                                 ? <button onClick={() => this.props.unfollow(u.id)}>Unfollow</button>
