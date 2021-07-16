@@ -1,6 +1,6 @@
 import {connect} from 'react-redux';
 import {Navbar} from './Navbar';
-import {DispatchType, StateType} from '../../redux/redux-store';
+import {StateType} from '../../redux/redux-store';
 import {DialogsStateType} from '../../redux/dialogs-reducer';
 import {SidebarStateType} from '../../redux/sidebar-reducer';
 
@@ -23,8 +23,8 @@ const mapStateToProps = (state: StateType): NavbarMapStateToPropsType => {
     }
 }
 
-const mapDispatchToProps = (dispatch: DispatchType): NavbarMapDispatchToProps => {
-    return {}
-}
+// const mapDispatchToProps = (dispatch: DispatchType): NavbarMapDispatchToProps => {
+//     return {}
+// }
 
-export const NavbarContainer = connect(mapStateToProps, mapDispatchToProps)(Navbar)
+export const NavbarContainer = connect(mapStateToProps, {})(Navbar)

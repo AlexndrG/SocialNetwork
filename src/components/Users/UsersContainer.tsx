@@ -8,7 +8,7 @@ import {
     unfollow,
     UserDataType, UsersStateType
 } from '../../redux/users-reducer';
-import {DispatchType, StateType} from '../../redux/redux-store';
+import {StateType} from '../../redux/redux-store';
 import React from 'react';
 import axios from 'axios';
 import {Users} from './Users';

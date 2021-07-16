@@ -1,5 +1,5 @@
 import {combineReducers, createStore} from 'redux';
-import {addPost, profileReducer, updateNewPostText} from './profile-reducer';
+import {addPost, profileReducer, setUserProfile, updateNewPostText} from './profile-reducer';
 import {dialogsReducer, sendMessage, updateNewMessageBody} from './dialogs-reducer';
 import {sidebarReducer} from './sidebar-reducer';
 import {
@@ -34,7 +34,8 @@ export type ActionsTypes =
     ReturnType<typeof setUsers> |
     ReturnType<typeof setCurrentPage> |
     ReturnType<typeof setTotalUsersCount> |
-    ReturnType<typeof toggleIsFetching>
+    ReturnType<typeof toggleIsFetching> |
+    ReturnType<typeof setUserProfile>
 
 export type DispatchType = (action: ActionsTypes) => void
 
