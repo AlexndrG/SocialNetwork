@@ -1,3 +1,8 @@
+import React from 'react';
+
+/*
+
+
 import {sendMessageCreator, updateNewMessageBodyCreator} from './dialogs-reducer';
 import {addPostActionCreator, updateNewPostTextActionCreator} from './profile-reducer';
 import {followAC, setUsersAC, unfollowAC, UsersStateType} from './users-reducer';
@@ -60,6 +65,9 @@ type ActionsTypes =
     ReturnType<typeof unfollowAC> |
     ReturnType<typeof setUsersAC>
 
+
+
+*/
 
 
 

@@ -1,14 +1,14 @@
 import {combineReducers, createStore} from 'redux';
-import {addPostActionCreator, profileReducer, updateNewPostTextActionCreator} from './profile-reducer';
-import {dialogsReducer, sendMessageCreator, updateNewMessageBodyCreator} from './dialogs-reducer';
+import {addPost, profileReducer, updateNewPostText} from './profile-reducer';
+import {dialogsReducer, sendMessage, updateNewMessageBody} from './dialogs-reducer';
 import {sidebarReducer} from './sidebar-reducer';
 import {
-    followAC,
-    setCurrentPageAC,
-    setTotalUsersCountAC,
-    setUsersAC,
-    toggleIsFetchingAC,
-    unfollowAC,
+    follow,
+    setCurrentPage,
+    setTotalUsersCount,
+    setUsers,
+    toggleIsFetching,
+    unfollow,
     usersReducer
 } from './users-reducer';
 
@@ -25,16 +25,16 @@ export let store = createStore(reducers)
 export type StateType = ReturnType<typeof reducers>
 
 export type ActionsTypes =
-    ReturnType<typeof addPostActionCreator> |
-    ReturnType<typeof updateNewPostTextActionCreator> |
-    ReturnType<typeof sendMessageCreator> |
-    ReturnType<typeof updateNewMessageBodyCreator> |
-    ReturnType<typeof followAC> |
-    ReturnType<typeof unfollowAC> |
-    ReturnType<typeof setUsersAC> |
-    ReturnType<typeof setCurrentPageAC> |
-    ReturnType<typeof setTotalUsersCountAC> |
-    ReturnType<typeof toggleIsFetchingAC>
+    ReturnType<typeof addPost> |
+    ReturnType<typeof updateNewPostText> |
+    ReturnType<typeof sendMessage> |
+    ReturnType<typeof updateNewMessageBody> |
+    ReturnType<typeof follow> |
+    ReturnType<typeof unfollow> |
+    ReturnType<typeof setUsers> |
+    ReturnType<typeof setCurrentPage> |
+    ReturnType<typeof setTotalUsersCount> |
+    ReturnType<typeof toggleIsFetching>
 
 export type DispatchType = (action: ActionsTypes) => void
 
