@@ -1,0 +1,9 @@
+.preloaderBlock {
+    text-align: center;
+}
+
+.preloader {
+    width: 150px;
+    height: 150px;
+    margin: 15px;
+}
