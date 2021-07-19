@@ -4,18 +4,25 @@ import axios from 'axios';
 import {connect} from 'react-redux';
 import {ProfileDataType, setUserProfile} from '../../redux/profile-reducer';
 import {StateType} from '../../redux/redux-store';
+import {RouteComponentProps, withRouter} from 'react-router-dom';
 
 //==================================================================================================================
 
 type ResponseType = ProfileDataType
 
 
-class ProfileContainer extends React.Component<ProfileComponentPropsType> {
+// class ProfileContainer extends React.Component<ProfileComponentPropsType> {
+class ProfileContainer extends React.Component<WithRouterPropsType> {
 
     componentDidMount() {
-        axios.get<ResponseType>(`https://social-network.samuraijs.com/api/1.0/profile/2`).then(response => {
-            this.props.setUserProfile(response.data)
-        })
+        let userId = this.props.match.params.userId
+        if (!userId) {
+            userId = '2'
+        }
+        axios.get<ResponseType>(`https://social-network.samuraijs.com/api/1.0/profile/` + userId)
+            .then(response => {
+                this.props.setUserProfile(response.data)
+            })
     }
 
     render() {
@@ -27,6 +34,18 @@ class ProfileContainer extends React.Component<ProfileComponentPropsType> {
     }
 }
 
+//==================================================================================================================
+//==================================================================================================================
+
+type PathParamsType = {
+    userId: string
+}
+
+type WithRouterPropsType = RouteComponentProps<PathParamsType> & ProfileComponentPropsType
+
+const WithUrlDataContainerComponent = withRouter(ProfileContainer)
+
+//==================================================================================================================
 //==================================================================================================================
 
 
@@ -42,10 +61,10 @@ export type ProfileComponentPropsType = ProfileMapStateToPropsType & ProfileMapD
 
 
 const mapStateToProps = (state: StateType): ProfileMapStateToPropsType => ({
-        profile: state.profilePage.profile
+    profile: state.profilePage.profile
 })
 
 export default connect(mapStateToProps,
     {
         setUserProfile
-    })(ProfileContainer)
+    })(WithUrlDataContainerComponent)

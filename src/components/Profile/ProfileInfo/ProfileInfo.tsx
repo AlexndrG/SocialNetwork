@@ -34,8 +34,9 @@ export const ProfileInfo = (props: ProfileInfoPropsType) => {
                         <div><b>User Id: </b>{props.profile.userId}</div>
 
                         <div><b>About me: </b>{props.profile.aboutMe}</div>
-                        <div><b>Contacts:</b>
-                            <br/><b><i>facebook: </i></b> {props.profile.contacts.facebook ? props.profile.contacts.facebook : ''}
+                        <b>Contacts:</b>
+                        <div style={{paddingLeft: '30px'}}>
+                            <b><i>facebook: </i></b> {props.profile.contacts.facebook ? props.profile.contacts.facebook : ''}
                             <br/><b><i>website: </i></b> {props.profile.contacts.website ? props.profile.contacts.website : ''}
                             <br/><b><i>vk:</i></b> {props.profile.contacts.vk ? props.profile.contacts.vk : ''}
                             <br/><b><i>twitter:</i></b> {props.profile.contacts.twitter ? props.profile.contacts.twitter : ''}
@@ -44,7 +45,9 @@ export const ProfileInfo = (props: ProfileInfoPropsType) => {
                             <br/><b><i>github:</i></b> {props.profile.contacts.github ? props.profile.contacts.github : ''}
                             <br/><b><i>mainLink:</i></b> {props.profile.contacts.mainLink ? props.profile.contacts.mainLink : ''}
                         </div>
-                        <div><b>Looking for a job: </b>{props.profile.lookingForAJob ? props.profile.lookingForAJobDescription : 'No'}</div>
+                        <div><b>Looking for a
+                            job: </b>{props.profile.lookingForAJob ? props.profile.lookingForAJobDescription : 'No'}
+                        </div>
 
 
                     </div>
