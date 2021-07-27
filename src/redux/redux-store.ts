@@ -6,7 +6,7 @@ import {
     follow,
     setCurrentPage,
     setTotalUsersCount,
-    setUsers,
+    setUsers, toggleFollowingInProgress,
     toggleIsFetching,
     unfollow,
     usersReducer
@@ -40,7 +40,8 @@ export type ActionsTypes =
     ReturnType<typeof setUserProfile> |
 
 
-    ReturnType<typeof setAuthUserData>
+    ReturnType<typeof setAuthUserData> |
+    ReturnType<typeof toggleFollowingInProgress>
 
 
 export type DispatchType = (action: ActionsTypes) => void
