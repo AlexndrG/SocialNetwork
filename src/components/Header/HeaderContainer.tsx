@@ -1,28 +1,17 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Header} from './Header';
-import axios from 'axios';
 import {setAuthUserData} from '../../redux/auth-reducer';
 import {StateType} from '../../redux/redux-store';
+import {usersAPI} from '../../api/api';
 
-type ResponseType = {
-    data: {
-        id: string
-        email: string
-        login: string
-    }
-    messages: string[]
-    fieldsErrors: string[]
-    resultCode: string
-}
+
 
 class HeaderContainer extends React.Component<HeaderComponentPropsType> {
     componentDidMount() {
-        axios.get<ResponseType>(`https://social-network.samuraijs.com/api/1.0/auth/me`, {
-            withCredentials: true,
-        }).then(response => {
-            if (+response.data.resultCode === 0) {
-                const {id, login, email} = response.data.data
+        usersAPI.authMe().then(data => {
+            if (+data.resultCode === 0) {
+                const {id, login, email} = data.data
                 this.props.setAuthUserData(id, login, email)
             }
         })
