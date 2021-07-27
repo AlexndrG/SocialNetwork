@@ -13,7 +13,7 @@ export const ProfileInfo = (props: ProfileInfoPropsType) => {
         <div>
             <div className={s.topImg}>
                 {/*<img src="https://lh3.googleusercontent.com/proxy/Dha2y0hknTXPBojcVYklYv5cWqSQrFZYpMuGuhKuyTIZXJZT_ScltaxDb0bAEAhVRSH6o5FngHBopLK7PkMo0v8ae_WS2r8yNwYfkg_4hdOI-lHrlZOQDQ"/>*/}
-                <img src="https://wallpaperaccess.com/full/1760835.jpg"/>
+                <img src="https://wallpaperaccess.com/full/1760835.jpg" alt={'background'}/>
             </div>
 
             {

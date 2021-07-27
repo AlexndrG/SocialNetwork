@@ -11,7 +11,7 @@ type DialogItemPropsType = {
 export const DialogItem = (props: DialogItemPropsType) => {
     return (
         <div className={s.dialog}>
-            <img className={s.avatar} src={props.avatar}/>
+            <img className={s.avatar} src={props.avatar} alt={'avatar'}/>
             <NavLink to={'/dialogs/' + props.id} activeClassName={s.active}>{props.name}</NavLink>
         </div>
     )
