@@ -7,7 +7,7 @@ type HeaderPropsType = {
     // email: string
     login: string
     isAuth: boolean
-    setAuthUserData: (userId: string, login: string, email: string) => void
+    // setAuthUserData: (userId: string, login: string, email: string) => void
 }
 
 export const Header = (props: HeaderPropsType) => {

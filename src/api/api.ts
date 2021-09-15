@@ -47,6 +47,16 @@ export const usersAPI = {
                 return response.data
             })
     },
+    followUser (id: number): Promise<FollowUnfollowUserResponseType> {
+        return instance.post<FollowUnfollowUserResponseType>(`follow/${id}`)
+            .then(response => response.data)
+    },
+
+    unfollowUser (id: number): Promise<FollowUnfollowUserResponseType> {
+        return instance.delete<FollowUnfollowUserResponseType>(`follow/${id}`)
+            .then(response => response.data)
+    },
+
 
     authMe (): Promise<AuthMeResponseType> {
         return instance.get<AuthMeResponseType>(`auth/me`)
@@ -58,16 +68,6 @@ export const usersAPI = {
             .then(response => response.data)
     },
 
-
-    followUser (id: number): Promise<FollowUnfollowUserResponseType> {
-        return instance.post<FollowUnfollowUserResponseType>(`follow/${id}`)
-            .then(response => response.data)
-    },
-
-    unfollowUser (id: number): Promise<FollowUnfollowUserResponseType> {
-        return instance.delete<FollowUnfollowUserResponseType>(`follow/${id}`)
-            .then(response => response.data)
-    },
 
 }
 
