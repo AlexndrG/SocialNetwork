@@ -1,6 +1,6 @@
 import { Dispatch } from 'redux';
 import {ActionsTypes} from './redux-store';
-import {usersAPI} from '../api/api';
+import {authAPI} from '../api/api';
 
 export const SET_AUTH_USER_DATA = 'SET_AUTH_USER_DATA'
 
@@ -44,9 +44,9 @@ export const setAuthUserData = (userId: string, login: string, email: string) =>
     } as const
 }
 
-export const authMe = () => {
+export const getAuthUserData = () => {
     return (dispatch: Dispatch) => {
-        usersAPI.authMe().then(data => {
+        authAPI.me().then(data => {
             if (+data.resultCode === 0) {
                 const {id, login, email} = data.data
                 dispatch(setAuthUserData(id, login, email))

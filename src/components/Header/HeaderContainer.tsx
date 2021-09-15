@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Header} from './Header';
-import {authMe} from '../../redux/auth-reducer';
+import {getAuthUserData} from '../../redux/auth-reducer';
 import {StateType} from '../../redux/redux-store';
 
 
@@ -10,7 +10,7 @@ import {StateType} from '../../redux/redux-store';
 class HeaderContainer extends React.Component<HeaderComponentPropsType> {
     componentDidMount() {
 
-        this.props.authMe()
+        this.props.getAuthUserData()
         // usersAPI.authMe().then(data => {
         //     if (+data.resultCode === 0) {
         //         const {id, login, email} = data.data
@@ -35,7 +35,7 @@ type HeaderMapStateToPropsType = {
 
 type HeaderMapDispatchToPropsType = {
     // setAuthUserData: (userId: string, login: string, email: string) => void
-    authMe: () => void
+    getAuthUserData: () => void
 }
 
 export type HeaderComponentPropsType = HeaderMapStateToPropsType & HeaderMapDispatchToPropsType
@@ -50,5 +50,5 @@ const mapStateToProps = (state: StateType): HeaderMapStateToPropsType => ({
 export default connect(mapStateToProps,
     {
         // setAuthUserData,
-        authMe,
+        getAuthUserData,
     })(HeaderContainer)

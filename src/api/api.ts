@@ -57,12 +57,6 @@ export const usersAPI = {
             .then(response => response.data)
     },
 
-
-    authMe (): Promise<AuthMeResponseType> {
-        return instance.get<AuthMeResponseType>(`auth/me`)
-            .then(response => response.data)
-    },
-
     getProfile (userId: string): Promise<GetPropfileResponseType> {
         return instance.get<GetPropfileResponseType>(`profile/` + userId)
             .then(response => response.data)
@@ -70,6 +64,14 @@ export const usersAPI = {
 
 
 }
+
+export const authAPI = {
+    me (): Promise<AuthMeResponseType> {
+        return instance.get<AuthMeResponseType>(`auth/me`)
+            .then(response => response.data)
+    },
+}
+
 
 
 
