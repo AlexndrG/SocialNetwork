@@ -6,9 +6,11 @@ import {
     getUsers,
 } from '../../redux/users-reducer';
 import {StateType} from '../../redux/redux-store';
-import React from 'react';
+import React, {ComponentType} from 'react';
 import {Users} from './Users';
 import {Preloader} from '../common/Preloader/Preloader';
+import {compose} from 'redux';
+import {withAuthRedirect} from '../../hoc/withAuthRedirect';
 
 
 //==================================================================================================================
@@ -110,6 +112,8 @@ const mapStateToProps = (state: StateType): UsersMapStateToPropsType => {
 // }
 
 // export default connect(mapStateToProps, mapDispatchToProps)(UsersComponent)
+
+/*
 export default connect(mapStateToProps,
     {
         follow,
@@ -117,3 +121,9 @@ export default connect(mapStateToProps,
         // getUsers: getUsersThunkCreator,
         getUsers,
     })(UsersContainer)
+*/
+
+export default compose<ComponentType>(
+    connect(mapStateToProps, {follow, unfollow, getUsers,}),
+    // withAuthRedirect
+)(UsersContainer)
