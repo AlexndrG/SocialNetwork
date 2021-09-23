@@ -14,8 +14,8 @@ type ProfileStatusStateType = {
 export class ProfileStatus extends React.Component<ProfileStatusPropsType, ProfileStatusStateType> {
     state = {
         editMode: false,
-        // status: this.props.status,
-        status: '',
+        status: this.props.status,
+///        status: '',
     }
 
     // activateEditMode = (e: MouseEvent<HTMLSpanElement>) => {
@@ -26,7 +26,7 @@ export class ProfileStatus extends React.Component<ProfileStatusPropsType, Profi
         // console.log(this)
         // debugger
 
-        this.state.status = this.props.status
+///        this.state.status = this.props.status
     }
 
     /*
@@ -52,6 +52,14 @@ export class ProfileStatus extends React.Component<ProfileStatusPropsType, Profi
         this.setState({
             status: e.currentTarget.value,
         })
+    }
+
+    componentDidUpdate(prevProps: Readonly<ProfileStatusPropsType>, prevState: Readonly<ProfileStatusStateType>, snapshot?: any) {
+        if (this.props.status !== prevProps.status) {
+            this.setState({
+                status: this.props.status
+            })
+        }
     }
 
     render() {
