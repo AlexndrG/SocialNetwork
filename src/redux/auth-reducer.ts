@@ -1,6 +1,6 @@
-import { Dispatch } from 'redux';
+import {Dispatch} from 'redux';
 import {ActionsTypes} from './redux-store';
-import {authAPI} from '../api/api';
+import {authAPI, LoginDataType} from '../api/api';
 
 export const SET_AUTH_USER_DATA = 'SET_AUTH_USER_DATA'
 
@@ -53,4 +53,13 @@ export const getAuthUserData = () => {
             }
         })
     }
+}
+
+
+export const login = (data: LoginDataType) => (dispatch: any) => {
+    authAPI.login(data)
+        .then(response => {
+            dispatch(getAuthUserData())
+        })
+
 }

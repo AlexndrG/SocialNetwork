@@ -1,9 +1,11 @@
 import React from 'react';
 import s from './Login.module.css'
 import {reduxForm, Field, InjectedFormProps} from 'redux-form';
+import {LoginDataType} from '../../api/api';
+import {Redirect} from 'react-router-dom';
 
 type FormDataType = {
-    login: string
+    email: string
     password: string
     rememberMe: boolean
 }
@@ -13,7 +15,7 @@ const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props: any) => {
         <form onSubmit={props.handleSubmit}>
             <div>
                 {/*<input placeholder={'Login'}/>*/}
-                <Field component={'input'} name={'login'} placeholder={'Login'}/>
+                <Field component={'input'} name={'email'} placeholder={'Login'}/>
             </div>
             <div>
                 {/*<input placeholder={'Password'}/>*/}
@@ -32,10 +34,19 @@ const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props: any) => {
 
 const LoginReduxForm = reduxForm<FormDataType>({form: 'login'})(LoginForm)
 
-export const Login = () => {
+
+
+type LoginPropsType = {
+    login: (data: LoginDataType) => void
+}
+
+
+export const Login = (props: LoginPropsType) => {
     const onSubmit = (formData: FormDataType) => {
-        console.log(formData)
+        // console.log(formData)
+        props.login(formData)
     }
+
 
     return (
         <div className={s.main}>
