@@ -7,14 +7,6 @@ import {LoginDataType} from '../../api/api';
 
 
 
-class LoginClass extends React.Component<LoginPropsType> {
-    render() {
-        return (
-            <Login login={this.props.login}/>
-        )
-    }
-}
-
 
 type LoginMapStateToProps = {
 }
@@ -30,4 +22,4 @@ type LoginMapDispatchToPropsType = {
 
 export type LoginPropsType = LoginMapStateToProps & LoginMapDispatchToPropsType
 
-export const LoginContainer = connect(mapStateToProps, {login})(LoginClass)
+export const LoginContainer = connect(mapStateToProps, {login})(Login)
