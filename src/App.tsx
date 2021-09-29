@@ -6,10 +6,10 @@ import {Settings} from './components/Settings/Settings';
 import {Route} from 'react-router-dom';
 import {NavbarContainer} from './components/Navbar/NavbarContainer';
 import HeaderContainer from './components/Header/HeaderContainer';
+import {Login} from './components/Login/Login';
 import ProfileContainer from './components/Profile/ProfileContainer';
 import UsersContainer from './components/Users/UsersContainer';
 import {DialogsContainer} from './components/Dialogs/DialogsContainer';
-import {LoginContainer} from './components/Login/LoginContainer';
 
 export const App = () => {
     return (
@@ -27,7 +27,7 @@ export const App = () => {
                 <Route path='/music' render={() => <Music/>}/>
                 <Route path='/settings' render={() => <Settings/>}/>
 
-                <Route path='/login' render={() => <LoginContainer/>}/>
+                <Route path='/login' render={() => <Login/>}/>
 
             </div>
         </div>

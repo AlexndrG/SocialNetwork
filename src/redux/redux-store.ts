@@ -1,6 +1,6 @@
 import {applyMiddleware, combineReducers, createStore} from 'redux';
-import {addPost, profileReducer, setUserProfile, setStatus, updateNewPostText} from './profile-reducer';
-import {dialogsReducer, sendMessage, updateNewMessageBody} from './dialogs-reducer';
+import {addPost, profileReducer, setUserProfile, setStatus} from './profile-reducer';
+import {dialogsReducer, sendMessage} from './dialogs-reducer';
 import {sidebarReducer} from './sidebar-reducer';
 import {
     followSuccess,
@@ -33,9 +33,9 @@ export type StateType = ReturnType<typeof reducers>
 
 export type ActionsTypes =
     ReturnType<typeof addPost> |
-    ReturnType<typeof updateNewPostText> |
+    // ReturnType<typeof updateNewPostText> |
     ReturnType<typeof sendMessage> |
-    ReturnType<typeof updateNewMessageBody> |
+    // ReturnType<typeof updateNewMessageBody> |
     ReturnType<typeof followSuccess> |
     ReturnType<typeof unfollowSuccess> |
     ReturnType<typeof setUsers> |

@@ -3,7 +3,57 @@ import {DialogItem} from './DialogItem/DialogItem';
 import s from './Dialogs.module.css';
 import {Message} from './Message/Message';
 import {DialogsPropsType} from './DialogsContainer';
+import {Field, InjectedFormProps, reduxForm} from 'redux-form';
 
+type AddMessageFormDataType = {
+    newMessageBody: string
+}
+
+const AddMessageForm: React.FC<InjectedFormProps<AddMessageFormDataType>> = (props) => {
+    return (
+        <form onSubmit={props.handleSubmit}>
+            <div>
+                {/*<textarea placeholder={'Enter your message'} cols={50} rows={7}/>*/}
+                <Field component={'textarea'} name={'newMessageBody'} placeholder={'Enter your message...'}
+                       cols={50} rows={7}/>
+            </div>
+            <div>
+                <button>Send</button>
+            </div>
+        </form>
+    )
+}
+
+const AddMessageFormRedux = reduxForm<AddMessageFormDataType>({form: 'dialogAddMessageForm'})(AddMessageForm)
+
+export const Dialogs = (props: DialogsPropsType) => {
+    const addMessage = (values: AddMessageFormDataType) => {
+        // console.log(values)
+        props.sendMessage(values.newMessageBody)
+    }
+
+    const state = props.dialogsPage
+    const dialogsElements = state.dialogs.map(d => <DialogItem key={d.id} avatar={d.avatar} name={d.name} id={d.id}/>)
+    const messagesElements = state.messages.map(m => <Message key={m.id} message={m.message} my={m.my}/>)
+
+    return (
+        <div className={s.dialogs}>
+            <div className={s.dialogItems}>
+                {dialogsElements}
+            </div>
+
+            <div className={s.messages}>
+                {messagesElements}
+
+                <AddMessageFormRedux onSubmit={addMessage}/>
+
+            </div>
+        </div>
+    )
+}
+
+
+/*
 
 export const Dialogs = (props: DialogsPropsType) => {
     const state = props.dialogsPage
@@ -48,3 +98,5 @@ export const Dialogs = (props: DialogsPropsType) => {
         </div>
     )
 }
+
+*/

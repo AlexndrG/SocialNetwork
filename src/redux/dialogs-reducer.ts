@@ -2,7 +2,7 @@ import {ActionsTypes} from './redux-store';
 
 
 export const SEND_MESSAGE = 'SEND-MESSAGE'
-export const UPDATE_NEW_MESSAGE_BODY = 'UPDATE-NEW-MESSAGE-BODY'
+// export const UPDATE_NEW_MESSAGE_BODY = 'UPDATE-NEW-MESSAGE-BODY'
 
 type DialogsDataType = {
     id: number
@@ -46,7 +46,7 @@ const initialState = {
         {id: 5, message: 'Yo', my: false}
     ] as Array<MessagesDataType>,
 
-    newMessageBody: 'New message'
+    // newMessageBody: 'New message'
 }
 
 export type DialogsStateType = typeof initialState
@@ -54,37 +54,45 @@ export type DialogsStateType = typeof initialState
 export const dialogsReducer = (state: DialogsStateType = initialState, action: ActionsTypes): DialogsStateType => {
     switch (action.type) {
         case SEND_MESSAGE:
-            const body = state.newMessageBody
+            // const body = state.newMessageBody
 
             return {
                 ...state,
-                newMessageBody: '',
+                // newMessageBody: '',
                 messages: [
                     ...state.messages,
-                    {id: 7, message: body, my: true}
+                    // {id: 7, message: body, my: true}
+                    {id: 7, message: action.body, my: true}
                 ]
             }
 
-        case UPDATE_NEW_MESSAGE_BODY:
-            return {
-                ...state,
-                newMessageBody: action.newText
-            }
+        // case UPDATE_NEW_MESSAGE_BODY:
+        //     debugger
+        //     return {
+        //         ...state,
+        //         newMessageBody: action.newText
+        //     }
 
         default:
             return state
     }
 }
 
-export const sendMessage = () => {
+// export const sendMessage = () => {
+//     return {
+//         type: SEND_MESSAGE
+//     } as const
+// }
+export const sendMessage = (body:string) => {
     return {
-        type: SEND_MESSAGE
+        type: SEND_MESSAGE,
+        body,
     } as const
 }
 
-export const updateNewMessageBody = (text: string) => {
-    return {
-        type: UPDATE_NEW_MESSAGE_BODY,
-        newText: text
-    } as const
-}
+// export const updateNewMessageBody = (text: string) => {
+//     return {
+//         type: UPDATE_NEW_MESSAGE_BODY,
+//         newText: text
+//     } as const
+// }

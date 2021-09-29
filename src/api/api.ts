@@ -19,10 +19,10 @@ export type GetUsersResponseType = {
     error: string
 }
 
-type ResponseType<T ={}> = {
+type ResponseType = {
     resultCode: string
     messages: string[]
-    data: T
+    data: {}
 }
 
 
@@ -87,20 +87,9 @@ type AuthMeResponseType = {
     resultCode: string
 }
 
-export type LoginDataType = {
-    email: string
-    password: string
-    rememberMe: boolean
-}
-
 export const authAPI = {
     me (): Promise<AuthMeResponseType> {
         return instance.get<AuthMeResponseType>(`auth/me`)
             .then(response => response.data)
     },
-
-    login(loginData: LoginDataType): Promise<ResponseType<{userId: number}>> {
-        return instance.post('auth/login', loginData)
-            .then(response => response.data)
-    }
 }
