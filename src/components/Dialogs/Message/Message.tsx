@@ -8,6 +8,7 @@ type MessagePropsType = {
 
 export const Message = (props: MessagePropsType) => {
     return (
-        <div className={s.message + ' ' + (!props.my && s.messageRight)}><pre>{props.message}</pre></div>
+        // <div className={s.message + ' ' + (!props.my && s.messageRight)}><pre>{props.message}</pre></div>
+        <div className={s.message + ' ' + (!props.my && s.messageRight)}>{props.message}</div>
     )
 }
