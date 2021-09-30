@@ -1,5 +1,6 @@
 import React from 'react';
 import s from './Login.module.css'
+import s2 from '../common/FormsControl/FormsControl.module.css'
 import {reduxForm, Field, InjectedFormProps} from 'redux-form';
 import {Input} from '../common/FormsControl/FormsControl';
 import {required} from '../../utils/validators/validator';
@@ -39,6 +40,11 @@ const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
             <div>
                 <button>Login</button>
             </div>
+
+            {props.error &&
+            <div className={s2.formSummaryError}>
+                {props.error}
+            </div>}
         </form>
     )
 }

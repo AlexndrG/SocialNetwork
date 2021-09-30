@@ -15,7 +15,8 @@ class ProfileContainer extends React.Component<WithRouterPropsType> {
     componentDidMount() {
         let userId = this.props.match.params.userId
         if (!userId) {
-            userId = '2'
+            // userId = '2'
+            userId = this.props.authorizedUserId
         }
 
         this.props.getUserProfile(userId)
@@ -29,7 +30,8 @@ class ProfileContainer extends React.Component<WithRouterPropsType> {
             <div>
                 <Profile profile={this.props.profile}
                          status={this.props.status}
-                         updateStatus={this.props.updateStatus}/>
+                         updateStatus={this.props.updateStatus}
+                />
             </div>
         )
     }
@@ -55,6 +57,9 @@ const WithUrlDataContainerComponent = withRouter(ProfileContainer)
 type ProfileMapStateToPropsType = {
     profile: ProfileDataType
     status: string
+    isAuth: boolean
+    authorizedUserId: string
+
 }
 
 type ProfileMapDispatchToProps = {
@@ -70,6 +75,8 @@ export type ProfileComponentPropsType = ProfileMapStateToPropsType & ProfileMapD
 const mapStateToProps = (state: StateType): ProfileMapStateToPropsType => ({
     profile: state.profilePage.profile,
     status: state.profilePage.status,
+    isAuth: state.auth.isAuth,
+    authorizedUserId: state.auth.id,
 })
 /*
 export default withAuthRedirect(
