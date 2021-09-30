@@ -8,6 +8,7 @@ type HeaderPropsType = {
     login: string
     isAuth: boolean
     // setAuthUserData: (userId: string, login: string, email: string) => void
+    logout: () => void
 }
 
 export const Header = (props: HeaderPropsType) => {
@@ -22,8 +23,9 @@ export const Header = (props: HeaderPropsType) => {
             {props.isAuth
                 ?
                 <div className={s.loginBlock}>
-                    {`${props.login} `}
-                    <NavLink to={'/logout'}>Logout</NavLink>
+                    {`${props.login}   `}
+                    {/*<NavLink to={'/logout'}>Logout</NavLink>*/}
+                    <button onClick={props.logout}>Log out</button>
                 </div>
 
                 :

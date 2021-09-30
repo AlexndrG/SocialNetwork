@@ -33,18 +33,18 @@ export const usersAPI = {
                 return response.data
             })
     },
-    followUser (id: number): Promise<ResponseType> {
+    followUser(id: number): Promise<ResponseType> {
         return instance.post<ResponseType>(`follow/${id}`)
             .then(response => response.data)
     },
 
-    unfollowUser (id: number): Promise<ResponseType> {
+    unfollowUser(id: number): Promise<ResponseType> {
         return instance.delete<ResponseType>(`follow/${id}`)
             .then(response => response.data)
     },
 
 
-    getProfile (userId: string): Promise<GetPropfileResponseType> {
+    getProfile(userId: string): Promise<GetPropfileResponseType> {
         console.warn(`!!! Don't use this method !!! Use profileAPI !!!`)
         return profileAPI.getProfile(userId)
     },
@@ -57,17 +57,17 @@ type GetPropfileResponseType = ProfileDataType
 type GetStatusResponseType = string
 
 export const profileAPI = {
-    getProfile (userId: string): Promise<GetPropfileResponseType> {
+    getProfile(userId: string): Promise<GetPropfileResponseType> {
         return instance.get<GetPropfileResponseType>(`profile/` + userId)
             .then(response => response.data)
     },
 
-    getStatus (userId: string): Promise<GetStatusResponseType> {
+    getStatus(userId: string): Promise<GetStatusResponseType> {
         return instance.get<GetStatusResponseType>(`profile/status/` + userId)
             .then(response => response.data)
     },
 
-    updateStatus (status: string): Promise<ResponseType> {
+    updateStatus(status: string): Promise<ResponseType> {
         return instance.put<ResponseType>(`profile/status/`, {status: status})
             .then(response => response.data)
     },
@@ -76,20 +76,37 @@ export const profileAPI = {
 
 // =============================================================================================
 
-type AuthMeResponseType = {
-    data: {
-        id: string
-        email: string
-        login: string
-    }
+type UserData = {
+    id: string
+    email: string
+    login: string
+}
+
+type UserId = {
+    id: string
+}
+
+type AuthMeResponseType<T={}> = {
+    data: T
     messages: string[]
     fieldsErrors: string[]
     resultCode: string
 }
 
 export const authAPI = {
-    me (): Promise<AuthMeResponseType> {
-        return instance.get<AuthMeResponseType>(`auth/me`)
+    me(): Promise<AuthMeResponseType<UserData>> {
+        return instance.get<AuthMeResponseType<UserData>>(`auth/me`)
             .then(response => response.data)
     },
+
+    login(email: string, password: string, rememberMe: boolean = false): Promise<AuthMeResponseType<UserId>> {
+        return instance.post<any>(`auth/login`, {email, password, rememberMe})
+            .then(response => response.data)
+    },
+
+    logout(): Promise<AuthMeResponseType> {
+        return instance.delete<AuthMeResponseType>(`auth/login`)
+            .then(response => response.data)
+    },
+
 }

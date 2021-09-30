@@ -1,6 +1,7 @@
-import { Dispatch } from 'redux';
-import {ActionsTypes} from './redux-store';
+import {Dispatch} from 'redux';
+import {ActionsTypes, StateType} from './redux-store';
 import {authAPI} from '../api/api';
+import {ThunkAction} from 'redux-thunk';
 
 export const SET_AUTH_USER_DATA = 'SET_AUTH_USER_DATA'
 
@@ -24,8 +25,8 @@ export const authReducer = (state: AuthStateType = initialState, action: Actions
         case SET_AUTH_USER_DATA:
             return {
                 ...state,
-                ...action.data,
-                isAuth: true,
+                ...action.payload,
+                // isAuth: true,
             }
 
         default:
@@ -33,13 +34,14 @@ export const authReducer = (state: AuthStateType = initialState, action: Actions
     }
 }
 
-export const setAuthUserData = (userId: string, login: string, email: string) => {
+export const setAuthUserData = (userId: string, login: string, email: string, isAuth: boolean) => {
     return {
         type: SET_AUTH_USER_DATA,
-        data: {
+        payload: {
             userId,
             email,
             login,
+            isAuth,
         },
     } as const
 }
@@ -49,8 +51,25 @@ export const getAuthUserData = () => {
         authAPI.me().then(data => {
             if (+data.resultCode === 0) {
                 const {id, login, email} = data.data
-                dispatch(setAuthUserData(id, login, email))
+                dispatch(setAuthUserData(id, login, email, true))
             }
         })
     }
 }
+
+export const login = (email: string, password: string, rememberMe: boolean): ThunkAction<void, StateType, unknown, ActionsTypes> => (dispatch) => {
+    authAPI.login(email, password, rememberMe).then(data => {
+        if (+data.resultCode === 0) {
+            dispatch(getAuthUserData())
+        }
+    })
+}
+
+export const logout = (): ThunkAction<void, StateType, unknown, ActionsTypes> => (dispatch) => {
+    authAPI.logout().then(data => {
+        if (+data.resultCode === 0) {
+            dispatch(setAuthUserData('', '', '', false))
+        }
+    })
+}
+
