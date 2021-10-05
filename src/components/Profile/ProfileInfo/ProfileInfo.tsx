@@ -52,7 +52,7 @@ export const ProfileInfo = (props: ProfileInfoPropsType) => {
                             <br/><b><i>github:</i></b> {props.profile.contacts.github ? props.profile.contacts.github : ''}
                             <br/><b><i>mainLink:</i></b> {props.profile.contacts.mainLink ? props.profile.contacts.mainLink : ''}
                         </div>
-                        <div><b>Looking for a job:</b>
+                        <div><b>{`Looking for a job: `}</b>
                             {props.profile.lookingForAJob ? props.profile.lookingForAJobDescription : 'No'}
                         </div>
 
