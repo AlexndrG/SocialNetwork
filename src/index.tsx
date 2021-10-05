@@ -3,10 +3,9 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import {HashRouter} from 'react-router-dom';
-import {App} from './App';
-
 import {store} from './redux/redux-store';
 import {Provider} from 'react-redux';
+import App from './App';
 
 ReactDOM.render(
     // из-за этого пользователи отрисовываются 2 раза (урок 49)
