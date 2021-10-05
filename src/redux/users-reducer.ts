@@ -160,6 +160,7 @@ export const requestUsers = (page: number, pageSize: number) => {
     }
 }
 
+
 export const unfollow = (userId: number) => {
     return (dispatch: Dispatch) => {
         dispatch(toggleFollowingInProgress(true, userId))
