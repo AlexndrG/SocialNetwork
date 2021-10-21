@@ -1,5 +1,5 @@
 import {applyMiddleware, combineReducers, createStore} from 'redux';
-import {addPost, profileReducer, setUserProfile, setStatus} from './profile-reducer';
+import {addPost, profileReducer, setUserProfile, setStatus, deletePost} from './profile-reducer';
 import {dialogsReducer, sendMessage} from './dialogs-reducer';
 import {sidebarReducer} from './sidebar-reducer';
 import {
@@ -35,6 +35,7 @@ export type StateType = ReturnType<typeof reducers>
 
 export type ActionsTypes =
     ReturnType<typeof addPost> |
+    ReturnType<typeof deletePost> |
     // ReturnType<typeof updateNewPostText> |
     ReturnType<typeof sendMessage> |
     // ReturnType<typeof updateNewMessageBody> |

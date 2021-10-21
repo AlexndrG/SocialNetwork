@@ -1,8 +1,9 @@
-import { Dispatch } from 'redux';
+import {Dispatch} from 'redux';
 import {ActionsTypes} from './redux-store';
 import {profileAPI, usersAPI} from '../api/api';
 
 export const ADD_POST = 'ADD-POST'
+export const DELETE_POST = 'DELETE-POST'
 // export const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
 
 export const SET_USER_PROFILE = 'SET_USER_PROFILE'
@@ -67,6 +68,12 @@ export const profileReducer = (state: ProfileStateType = initialState, action: A
                 // newPostText: ''
             }
 
+        case 'DELETE-POST':
+            return {
+                ...state,
+                posts: state.posts.filter(p => p.id !== action.postId)
+            }
+
         // case UPDATE_NEW_POST_TEXT:
         //     return {
         //         ...state,
@@ -96,10 +103,18 @@ export const profileReducer = (state: ProfileStateType = initialState, action: A
 //         type: ADD_POST
 //     } as const
 // }
-export const addPost = (postText:string) => {
+export const addPost = (postText: string) => {
     return {
         type: ADD_POST,
         postText,
+    } as const
+}
+
+
+export const deletePost = (postId: number) => {
+    return {
+        type: DELETE_POST,
+        postId,
     } as const
 }
 
@@ -125,7 +140,6 @@ export const getUserProfile = (userId: string) => {
         })
     }
 }
-
 
 
 export const getStatus = (userId: string) => {
