@@ -33,7 +33,9 @@ const AddNewPostForm: React.FC<InjectedFormProps<MyPostFormDataType>> = (props) 
 
 const AddNewPostFormRedux = reduxForm<MyPostFormDataType>({form: 'profileAddNewPostForm'})(AddNewPostForm)
 
-export const MyPosts = (props: MyPostsPropsType) => {
+export const MyPosts = React.memo((props: MyPostsPropsType) => {
+    console.log('Render!')
+
     const onAddPost = (values: MyPostFormDataType) => {
         // console.log(formData)
         props.addPost(values.newPostText)
@@ -52,58 +54,41 @@ export const MyPosts = (props: MyPostsPropsType) => {
             </div>
         </div>
     )
-}
+})
 
 
 /*
 
-export const MyPosts = (props: MyPostsPropsType) => {
-    const postsElements = props.posts.map(p => <Post key={p.id} message={p.message} likesCount={p.likesCount}/>)
+// export class MyPosts extends React.PureComponent<MyPostsPropsType> {
 
-    const newPostElement = React.createRef<HTMLTextAreaElement>();
 
-    const onAddPost = () => {
-        props.addPost()
-        // props.dispatch({type: 'ADD-POST'})
-        // props.dispatch(addPostActionCreator())
-        // props.updateNewPostText('')
-        newPostElement.current?.focus()     // это аналогично: newPostElement.current && newPostElement.current.focus()
+export class MyPosts extends React.Component<MyPostsPropsType> {
+    shouldComponentUpdate(nextProps: Readonly<MyPostsPropsType>, nextState: Readonly<{}>, nextContext: any): boolean {
+        return nextProps !== this.props || nextState !== this.state
     }
 
-    const onPostChange = () => {
-        if (newPostElement.current) {
-            props.updateNewPostText(newPostElement.current.value)
-            // props.dispatch({type: 'UPDATE-NEW-POST-TEXT', newText: newPostElement.current.value})
-            // props.dispatch(updateNewPostTextActionCreator(newPostElement.current.value))
+    render() {
+        console.log('Render!')
+        const onAddPost = (values: MyPostFormDataType) => {
+            // console.log(formData)
+            this.props.addPost(values.newPostText)
         }
+
+        const postsElements = this.props.posts.map(p => <Post key={p.id} message={p.message}
+                                                              likesCount={p.likesCount}/>)
+
+        return (
+            <div className={s.postsBlock}>
+                <h3>My posts</h3>
+
+                <AddNewPostFormRedux onSubmit={onAddPost}/>
+
+                <div className={s.posts}>
+                    {postsElements}
+                </div>
+            </div>
+        )
     }
-
-    return (
-        <div className={s.postsBlock}>
-            <h3>My posts</h3>
-            <div>
-                <div>
-                    <textarea
-                        ref={newPostElement}
-                        cols={35} rows={5}
-                        value={props.newPostText}
-                        onChange={onPostChange}
-                    />
-                </div>
-                <div>
-                    <button onClick={onAddPost}>Add post</button>
-                </div>
-            </div>
-            <div className={s.posts}>
-
-                {postsElements}
-
-                {/!*<Post message={posts[0].message} likesCount={posts[0].likesCount}/>*!/}
-                {/!*<Post message={posts[1].message} likesCount={posts[1].likesCount}/>*!/}
-            </div>
-        </div>
-    )
 }
-
 
 */
