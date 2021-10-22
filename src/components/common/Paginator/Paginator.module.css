@@ -1,3 +1,23 @@
+.paginator {
+    display: flex;
+    justify-content: center;
+}
+
+.main {
+    display: flex;
+    flex-wrap: nowrap;
+    max-width: 800px;
+    overflow-x: scroll;
+    overflow-y: hidden;
+}
+
+.page {
+    display: inline-block;
+    border: 1px solid black;
+    padding: 5px;
+    margin: 5px;
+}
+
 .selectedPage {
     color: gold;
     font-weight: bold;

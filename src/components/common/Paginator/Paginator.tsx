@@ -17,17 +17,19 @@ export const Paginator = (props: PaginatorPropsType) => {
     }
 
     return (
-        <div>
-            {
-                pages.map(p =>
-                    <span
-                        key={p}
-                        className={props.currentPage === p ? s.selectedPage : ''}
-                        onClick={(event) => props.onPageChanged(p)}>
+        <div className={s.paginator}>
+            <div className={s.main}>
+                {
+                    pages.map(p =>
+                        <div
+                            key={p}
+                            className={s.page + ' ' + (props.currentPage === p ? s.selectedPage : '')}
+                            onClick={(event) => props.onPageChanged(p)}>
                             {` ${p}`}
-                    </span>
-                )
-            }
+                        </div>
+                    )
+                }
+            </div>
         </div>
     )
 }
