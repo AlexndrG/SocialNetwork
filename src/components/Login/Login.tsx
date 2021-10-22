@@ -2,7 +2,7 @@ import React from 'react';
 import s from './Login.module.css'
 import s2 from '../common/FormsControl/FormsControl.module.css'
 import {reduxForm, Field, InjectedFormProps} from 'redux-form';
-import {Input} from '../common/FormsControl/FormsControl';
+import {createField, Input} from '../common/FormsControl/FormsControl';
 import {required} from '../../utils/validators/validator';
 import {connect} from 'react-redux';
 import {login} from '../../redux/auth-reducer';
@@ -18,25 +18,15 @@ type FormDataType = {
 const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
     return (
         <form onSubmit={props.handleSubmit}>
-            <div>
-                {/*<input placeholder={'Login'}/>*/}
-                {/*<Field component={'input'} name={'login'} placeholder={'Login'}*/}
-                <Field component={Input} name={'email'} placeholder={'Email'}
-                       validate={required}
-                />
-            </div>
-            <div>
-                {/*<input placeholder={'Password'}/>*/}
-                {/*<Field component={'input'} name={'password'} placeholder={'Password'}/>*/}
-                <Field component={Input} name={'password'} placeholder={'Password'} type={'password'}
-                       validate={required}
-                />
-            </div>
-            <div>
-                {/*<input type={'checkbox'}/> Remember me*/}
-                {/*<Field component={'input'} type={'checkbox'} name={'rememberMe'}/> Remember me*/}
-                <Field component={Input} type={'checkbox'} name={'rememberMe'}/> Remember me
-            </div>
+                {/*<Field component={Input} name={'email'} placeholder={'Email'} validate={required}/>*/}
+                {createField(Input,'email','Email',[required])}
+
+                {/*<Field component={Input} name={'password'} placeholder={'Password'} type={'password'} validate={required}/>*/}
+                {createField(Input,'password','Password',[required], {type:'password'})}
+
+                {/*<Field component={Input} type={'checkbox'} name={'rememberMe'}/> Remember me*/}
+                {createField(Input,'rememberMe','',[], {type:'checkbox'},'Remember me')}
+
             <div>
                 <button>Login</button>
             </div>
