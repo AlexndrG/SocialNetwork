@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.css": "/SocialNetwork/static/css/main.faa0708f.chunk.css",
-    "main.js": "/SocialNetwork/static/js/main.11a3f1b8.chunk.js",
-    "main.js.map": "/SocialNetwork/static/js/main.11a3f1b8.chunk.js.map",
-    "runtime-main.js": "/SocialNetwork/static/js/runtime-main.42499edd.js",
-    "runtime-main.js.map": "/SocialNetwork/static/js/runtime-main.42499edd.js.map",
-    "static/js/2.cd970635.chunk.js": "/SocialNetwork/static/js/2.cd970635.chunk.js",
-    "static/js/2.cd970635.chunk.js.map": "/SocialNetwork/static/js/2.cd970635.chunk.js.map",
-    "static/js/3.c42f83f1.chunk.js": "/SocialNetwork/static/js/3.c42f83f1.chunk.js",
-    "static/js/3.c42f83f1.chunk.js.map": "/SocialNetwork/static/js/3.c42f83f1.chunk.js.map",
+    "main.css": "/SocialNetwork/static/css/main.642ccb5e.chunk.css",
+    "main.js": "/SocialNetwork/static/js/main.ac85fa0c.chunk.js",
+    "main.js.map": "/SocialNetwork/static/js/main.ac85fa0c.chunk.js.map",
+    "runtime-main.js": "/SocialNetwork/static/js/runtime-main.e4f7a7b3.js",
+    "runtime-main.js.map": "/SocialNetwork/static/js/runtime-main.e4f7a7b3.js.map",
+    "static/js/2.9ff1ca76.chunk.js": "/SocialNetwork/static/js/2.9ff1ca76.chunk.js",
+    "static/js/2.9ff1ca76.chunk.js.map": "/SocialNetwork/static/js/2.9ff1ca76.chunk.js.map",
+    "static/js/3.19b77f38.chunk.js": "/SocialNetwork/static/js/3.19b77f38.chunk.js",
+    "static/js/3.19b77f38.chunk.js.map": "/SocialNetwork/static/js/3.19b77f38.chunk.js.map",
     "index.html": "/SocialNetwork/index.html",
-    "static/css/main.faa0708f.chunk.css.map": "/SocialNetwork/static/css/main.faa0708f.chunk.css.map",
-    "static/js/2.cd970635.chunk.js.LICENSE.txt": "/SocialNetwork/static/js/2.cd970635.chunk.js.LICENSE.txt",
+    "static/css/main.642ccb5e.chunk.css.map": "/SocialNetwork/static/css/main.642ccb5e.chunk.css.map",
+    "static/js/2.9ff1ca76.chunk.js.LICENSE.txt": "/SocialNetwork/static/js/2.9ff1ca76.chunk.js.LICENSE.txt",
     "static/media/preloader.8debf21c.gif": "/SocialNetwork/static/media/preloader.8debf21c.gif"
   },
   "entrypoints": [
-    "static/js/runtime-main.42499edd.js",
-    "static/js/2.cd970635.chunk.js",
-    "static/css/main.faa0708f.chunk.css",
-    "static/js/main.11a3f1b8.chunk.js"
+    "static/js/runtime-main.e4f7a7b3.js",
+    "static/js/2.9ff1ca76.chunk.js",
+    "static/css/main.642ccb5e.chunk.css",
+    "static/js/main.ac85fa0c.chunk.js"
   ]
 }
