@@ -9,21 +9,22 @@ type PaginatorPropsType = {
     onPageChanged: (pageNumber: number) => void
 }
 
-export const Paginator = (props: PaginatorPropsType) => {
+// export const Paginator = (props: PaginatorPropsType) => {
+export const Paginator = ({totalUserCount, pageSize, currentPage, onPageChanged}: PaginatorPropsType) => {
     useEffect(() => {
-        if (refs[props.currentPage]) {
-            const index = props.currentPage > 5
-                ? refs.length >= props.currentPage + 5 ? props.currentPage + 5 : refs.length-1
-                : props.currentPage-1
-            alert(index)
-            const ref = refs[index].current
+        if (refs[currentPage-1]) {
+            const index = currentPage > 5
+                ? (refs.length >= currentPage + 5 ? currentPage + 5 : refs.length)
+                : currentPage
+            const ref = refs[index-1].current
             if (ref) {
                 ref.scrollIntoView()
             }
+            window.scrollTo(0, 0)
         }
     }, [])
 
-    const pagesCount = Math.ceil(props.totalUserCount / props.pageSize)
+    const pagesCount = Math.ceil(totalUserCount / pageSize)
     const pages: Array<number> = []
     const refs: Array<RefObject<HTMLDivElement>> = []
     for (let i = 1; i <= pagesCount; i++) {
@@ -39,8 +40,8 @@ export const Paginator = (props: PaginatorPropsType) => {
                         <div
                             key={p}
                             ref={refs[i]}
-                            className={s.page + ' ' + (props.currentPage === p ? s.selectedPage : '')}
-                            onClick={(event) => props.onPageChanged(p)}>
+                            className={s.page + ' ' + (currentPage === p ? s.selectedPage : '')}
+                            onClick={(event) => onPageChanged(p)}>
                             {` ${p}`}
                         </div>
                     )
