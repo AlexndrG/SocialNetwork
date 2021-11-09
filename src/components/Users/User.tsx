@@ -24,6 +24,7 @@ export const User = (props: UserPropsType) => {
                </NavLink>
                {props.user.photos.large && <img src={props.user.photos.large} alt={'User_photo'}/>}
 
+               <br/>
                {props.user.followed
                    ? <button
                        disabled={props.followingInProgress.some(id => id === props.user.id)}

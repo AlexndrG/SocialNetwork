@@ -3,17 +3,16 @@ import './App.css';
 import {News} from './components/News/News';
 import {Music} from './components/Music/Music';
 import {Settings} from './components/Settings/Settings';
-import {Route, withRouter} from 'react-router-dom';
+import {HashRouter, Route, withRouter} from 'react-router-dom';
 import {NavbarContainer} from './components/Navbar/NavbarContainer';
 import HeaderContainer from './components/Header/HeaderContainer';
 import ProfileContainer from './components/Profile/ProfileContainer';
 import UsersContainer from './components/Users/UsersContainer';
 import {DialogsContainer} from './components/Dialogs/DialogsContainer';
 import Login from './components/Login/Login';
-import {connect} from 'react-redux';
-import {getAuthUserData} from './redux/auth-reducer';
+import {connect, Provider} from 'react-redux';
 import {compose} from 'redux';
-import {StateType} from './redux/redux-store';
+import {StateType, store} from './redux/redux-store';
 import {initializeApp} from './redux/app-reducer';
 import {Preloader} from './components/common/Preloader/Preloader';
 
@@ -63,7 +62,17 @@ const mapStateToProps = (state: StateType): AppMapStateToPropsType => ({
     initialized: state.app.initialized
 })
 
-export default compose<ComponentType>(
+const AppContainer = compose<ComponentType>(
     withRouter,
-    connect(mapStateToProps,{initializeApp})
+    connect(mapStateToProps, {initializeApp})
 )(App)
+
+const AppSamuraiJS = () => {
+    return <HashRouter>
+        <Provider store={store}>
+            <AppContainer/>
+        </Provider>
+    </HashRouter>
+}
+
+export default AppSamuraiJS
