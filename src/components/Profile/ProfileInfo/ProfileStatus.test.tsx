@@ -3,7 +3,7 @@ import TestRenderer from 'react-test-renderer';
 import {ProfileStatus} from './ProfileStatus';
 
 
-describe('Profile status component', () => {
+describe('ProfileStatus component', () => {
 
     test('after creation state.status should contain correct status', () => {
         const component = TestRenderer.create(

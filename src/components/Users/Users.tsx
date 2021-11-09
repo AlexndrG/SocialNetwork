@@ -2,6 +2,7 @@ import React from 'react';
 import {UserDataType} from '../../redux/users-reducer';
 import {Paginator} from '../common/Paginator/Paginator';
 import {User} from './User';
+import {PaginatorLikeDimych} from '../common/Paginator/PaginatorLikeDimych';
 
 type UsersPropsType = {
     users: Array<UserDataType>
@@ -23,6 +24,14 @@ export const Users = (props: UsersPropsType) => {
                 currentPage={props.currentPage}
                 onPageChanged={props.onPageChanged}
             />
+
+            <PaginatorLikeDimych
+                totalUserCount={props.totalUserCount}
+                pageSize={props.pageSize}
+                currentPage={props.currentPage}
+                onPageChanged={props.onPageChanged}
+            />
+
 
             {props.users.map(u => <User
                 key={u.id}
