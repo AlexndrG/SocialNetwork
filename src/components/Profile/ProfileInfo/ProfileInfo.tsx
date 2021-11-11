@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {ChangeEvent} from 'react';
 import s from './ProfileInfo.module.css';
 import {ProfileDataType} from '../../../redux/profile-reducer';
 import {Preloader} from '../../common/Preloader/Preloader';
@@ -6,24 +6,43 @@ import userPhoto from '../../assets/images/user.png'
 import {ProfileStatusWithHooks} from './ProfileStatusWithHooks';
 
 type ProfileInfoPropsType = {
+    isOwner: boolean
     profile: ProfileDataType
     status: string
     updateStatus: (status: string) => void
+    savePhoto: (image: File) => void
 }
 
-export const ProfileInfo = ({profile, status, updateStatus}: ProfileInfoPropsType) => {
+export const ProfileInfo = ({isOwner, profile, status, updateStatus, savePhoto}: ProfileInfoPropsType) => {
+    const onMainPhotoSelected = (e: ChangeEvent<HTMLInputElement>) => {
+        if (e.currentTarget.files && e.currentTarget.files[0]) {
+            savePhoto(e.currentTarget.files[0])
+        }
+    }
+
     return (
         <div>
-            <div className={s.topImg}>
+            <div>
                 {/*<img src="https://lh3.googleusercontent.com/proxy/Dha2y0hknTXPBojcVYklYv5cWqSQrFZYpMuGuhKuyTIZXJZT_ScltaxDb0bAEAhVRSH6o5FngHBopLK7PkMo0v8ae_WS2r8yNwYfkg_4hdOI-lHrlZOQDQ"/>*/}
-                <img src="https://wallpaperaccess.com/full/1760835.jpg" alt={'background'}/>
+                <img
+                    className={s.topImg}
+                    src="https://wallpaperaccess.com/full/1760835.jpg"
+                    alt={'background'}
+                />
             </div>
 
             {
                 profile.photos
                     ?
                     <div className={s.descriptionBlock}>
-                        <img src={profile.photos.large ? profile.photos.large : userPhoto} alt={'Avatar'}/>
+                        <img
+                            className={s.avatarImage}
+                            src={profile.photos.large}
+                            alt={'Avatar'}
+                        />
+                        <br/>
+                        {isOwner && <input type={'file'} onChange={onMainPhotoSelected}/>}
+                        <p/>
 
                         {/*<ProfileStatus*/}
                         <ProfileStatusWithHooks

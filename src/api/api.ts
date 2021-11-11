@@ -19,10 +19,10 @@ export type GetUsersResponseType = {
     error: string
 }
 
-type ResponseType = {
+type ResponseType<T = {}> = {
+    data: T
     resultCode: string
     messages: string[]
-    data: {}
 }
 
 
@@ -56,6 +56,13 @@ type GetPropfileResponseType = ProfileDataType
 
 type GetStatusResponseType = string
 
+export type PhotoData = {
+    photos: {
+        small: string
+        large: string
+    }
+}
+
 export const profileAPI = {
     getProfile(userId: string): Promise<GetPropfileResponseType> {
         return instance.get<GetPropfileResponseType>(`profile/` + userId)
@@ -72,6 +79,16 @@ export const profileAPI = {
             .then(response => response.data)
     },
 
+    savePhoto(photoFile: File): Promise<ResponseType<PhotoData>> {
+        const formData = new FormData()
+        formData.append('image', photoFile)
+        return instance.put<ResponseType<PhotoData>>(`profile/photo/`, formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        })
+            .then(response => response.data)
+    },
 }
 
 // =============================================================================================
@@ -86,7 +103,7 @@ type UserId = {
     id: string
 }
 
-type AuthMeResponseType<T={}> = {
+type AuthMeResponseType<T = {}> = {
     data: T
     messages: string[]
     fieldsErrors: string[]

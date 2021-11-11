@@ -1,19 +1,23 @@
 import React, {ComponentType} from 'react';
 import {Profile} from './Profile';
 import {connect} from 'react-redux';
-import {ProfileDataType, getUserProfile, getStatus, updateStatus} from '../../redux/profile-reducer';
+import {
+    ProfileDataType,
+    getUserProfile,
+    getStatus,
+    updateStatus,
+    savePhoto
+} from '../../redux/profile-reducer';
 import {StateType} from '../../redux/redux-store';
 import {RouteComponentProps, withRouter} from 'react-router-dom';
 import {compose} from 'redux';
-import {withAuthRedirect} from '../../hoc/withAuthRedirect';
 
 //==================================================================================================================
 
 
 // class ProfileContainer extends React.Component<ProfileComponentPropsType> {
 class ProfileContainer extends React.Component<WithRouterPropsType> {
-
-    componentDidMount() {
+    refreshProfile() {
         let userId = this.props.match.params.userId
         if (!userId) {
             // userId = '2'
@@ -27,14 +31,27 @@ class ProfileContainer extends React.Component<WithRouterPropsType> {
         this.props.getStatus(userId)
     }
 
+    componentDidMount() {
+        this.refreshProfile()
+    }
+
+    componentDidUpdate(prevProps: Readonly<WithRouterPropsType>, prevState: Readonly<{}>, snapshot?: any) {
+        if (prevProps.match.params.userId !== this.props.match.params.userId) {
+            this.refreshProfile()
+        }
+    }
+
     render() {
         // if (!this.props.isAuth) return <Redirect to={'/login'}/>
 
         return (
             <div>
-                <Profile profile={this.props.profile}
-                         status={this.props.status}
-                         updateStatus={this.props.updateStatus}
+                <Profile
+                    isOwner={!this.props.match.params.userId}
+                    profile={this.props.profile}
+                    status={this.props.status}
+                    updateStatus={this.props.updateStatus}
+                    savePhoto={this.props.savePhoto}
                 />
             </div>
         )
@@ -71,6 +88,7 @@ type ProfileMapDispatchToProps = {
     getUserProfile: (id: string) => void
     getStatus: (id: string) => void
     updateStatus: (status: string) => void
+    savePhoto: (image: File) => void
 }
 
 export type ProfileComponentPropsType = ProfileMapStateToPropsType & ProfileMapDispatchToProps
@@ -93,7 +111,7 @@ export default withAuthRedirect(
 */
 
 export default compose<ComponentType>(
-    connect(mapStateToProps, {getUserProfile, getStatus, updateStatus}),
+    connect(mapStateToProps, {getUserProfile, getStatus, updateStatus, savePhoto}),
     withRouter,
     // withAuthRedirect
 )(ProfileContainer)

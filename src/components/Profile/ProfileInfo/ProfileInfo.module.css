@@ -1,5 +1,9 @@
-.topImg img{
+.topImg {
     width: 100%;
+}
+
+.avatarImage {
+    max-width: 300px;
 }
 
 .descriptionBlock {
