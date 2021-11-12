@@ -1,7 +1,7 @@
 import React from 'react';
 import s from './Login.module.css'
 import s2 from '../common/FormsControl/FormsControl.module.css'
-import {reduxForm, Field, InjectedFormProps} from 'redux-form';
+import {reduxForm, InjectedFormProps} from 'redux-form';
 import {createField, Input} from '../common/FormsControl/FormsControl';
 import {required} from '../../utils/validators/validator';
 import {connect} from 'react-redux';

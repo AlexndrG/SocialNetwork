@@ -1,7 +1,8 @@
 import {Dispatch} from 'redux';
-import {ActionsTypes} from './redux-store';
-import {authAPI, PhotoData, profileAPI, usersAPI} from '../api/api';
-import {setAuthUserData} from './auth-reducer';
+import {ActionsTypes, StateType} from './redux-store';
+import {PhotoData, profileAPI, usersAPI} from '../api/api';
+import {ProfileDataFormType} from '../components/Profile/ProfileInfo/ProfileDataForm';
+import {stopSubmit} from 'redux-form';
 
 export const ADD_POST = 'ADD-POST'
 export const DELETE_POST = 'DELETE-POST'
@@ -11,6 +12,10 @@ export const SET_USER_PROFILE = 'SET_USER_PROFILE'
 export const SET_STATUS = 'SET_STATUS'
 
 export const SAVE_PHOTO_SUCCESS = 'SAVE_PHOTO_SUCCESS'
+
+export type ContactType = {
+    [key: string]: string
+}
 
 export type ProfileDataType = {
     aboutMe: string
@@ -23,7 +28,7 @@ export type ProfileDataType = {
         youtube: string
         github: string
         mainLink: string
-    },
+    }
     lookingForAJob: boolean
     lookingForAJobDescription: string
     fullName: string
@@ -76,12 +81,6 @@ export const profileReducer = (state: ProfileStateType = initialState, action: A
                 ...state,
                 posts: state.posts.filter(p => p.id !== action.postId)
             }
-
-        // case UPDATE_NEW_POST_TEXT:
-        //     return {
-        //         ...state,
-        //         newPostText: action.newText
-        //     }
 
         case SET_USER_PROFILE:
             return {
@@ -144,5 +143,39 @@ export const savePhoto = (image: File) => async (dispatch: Dispatch) => {
     const data = await profileAPI.savePhoto(image)
     if (+data.resultCode === 0) {
         dispatch(savePhotoSuccess(data.data))
+    }
+}
+
+export const saveProfile = (formData: ProfileDataFormType) => async (dispatch: Dispatch<any>, getState: () => StateType) => {
+    const data = await profileAPI.saveProfile(formData)
+    if (+data.resultCode === 0) {
+        const userId = getState().auth.id
+        dispatch(getUserProfile(userId))
+    } else {
+        const message = data.messages ? data.messages[0] : 'Some error!'
+        // dispatch(stopSubmit('edit-profile', {_error: message}))
+
+        /*
+                const errorPrefix = 'Invalid url format (Contacts->'
+                if (message.indexOf(errorPrefix) >= 0) {
+                    let fieldName = message.substr(errorPrefix.length)
+                    fieldName = fieldName.substring(0, fieldName.indexOf(')'))
+                    fieldName = fieldName[0].toLowerCase() + fieldName.substring(1)
+                    // console.log('_', fieldName, '_')
+                    dispatch(stopSubmit('edit-profile', {'contacts': {[fieldName]: message}}))
+                } else {
+                    dispatch(stopSubmit('edit-profile', {_error: message}))
+                }
+        */
+
+        const errorText = message.split('->')
+        if (errorText[1]) {
+            let fieldName = errorText[1][0].toLowerCase() + errorText[1].substr(1, errorText[1].length-2)
+            dispatch(stopSubmit('edit-profile', {'contacts': {[fieldName]: message}}))
+            return Promise.reject(message)
+        } else {
+            dispatch(stopSubmit('edit-profile', {_error: message}))
+            return Promise.reject(message)
+        }
     }
 }

@@ -1,6 +1,7 @@
 import axios from 'axios';
 import {UserDataType} from '../redux/users-reducer';
 import {ProfileDataType} from '../redux/profile-reducer';
+import {ProfileDataFormType} from '../components/Profile/ProfileInfo/ProfileDataForm';
 
 const instance = axios.create({
     baseURL: 'https://social-network.samuraijs.com/api/1.0/',
@@ -87,6 +88,11 @@ export const profileAPI = {
                 'Content-Type': 'multipart/form-data'
             }
         })
+            .then(response => response.data)
+    },
+
+    saveProfile(formData: ProfileDataFormType): Promise<ResponseType> {
+        return instance.put<ResponseType>(`profile/`, formData)
             .then(response => response.data)
     },
 }
