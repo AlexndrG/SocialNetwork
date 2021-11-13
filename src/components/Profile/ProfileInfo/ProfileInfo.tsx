@@ -1,5 +1,6 @@
 import React, {ChangeEvent, useState} from 'react';
 import s from './ProfileInfo.module.css';
+import userPhoto from '../../assets/images/user.png'
 import {ContactType, ProfileDataType} from '../../../redux/profile-reducer';
 import {Preloader} from '../../common/Preloader/Preloader';
 import {ProfileStatusWithHooks} from './ProfileStatusWithHooks';
@@ -30,7 +31,7 @@ export const ProfileInfo = ({isOwner, profile, status, updateStatus, savePhoto, 
         // saveProfile(formData, setEditMode)
 
         saveProfile(formData)
-            .then (()=>{
+            .then(() => {
                 setEditMode(false)
             })
     }
@@ -52,7 +53,7 @@ export const ProfileInfo = ({isOwner, profile, status, updateStatus, savePhoto, 
                     ? <div className={s.descriptionBlock}>
                         <img
                             className={s.avatarImage}
-                            src={profile.photos.large}
+                            src={profile.photos.large || userPhoto}
                             alt={'Avatar'}
                         />
                         <br/>
