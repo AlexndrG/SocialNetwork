@@ -122,8 +122,9 @@ export const authAPI = {
             .then(response => response.data)
     },
 
-    login(email: string, password: string, rememberMe: boolean = false): Promise<AuthMeResponseType<UserId>> {
-        return instance.post<any>(`auth/login`, {email, password, rememberMe})
+    // login(email: string, password: string, rememberMe: boolean = false): Promise<AuthMeResponseType<UserId>> {
+    login(email: string, password: string, rememberMe: boolean, captcha: string): Promise<AuthMeResponseType<UserId>> {
+        return instance.post<any>(`auth/login`, {email, password, rememberMe, captcha})
             .then(response => response.data)
     },
 
@@ -132,4 +133,17 @@ export const authAPI = {
             .then(response => response.data)
     },
 
+}
+
+// =============================================================================================
+
+type GetCapthaUrlResponseType = {
+    url:string
+}
+
+export const securityAPI = {
+    getCapthaUrl(): Promise<GetCapthaUrlResponseType> {
+        return instance.get<GetCapthaUrlResponseType>(`security/get-captcha-url`)
+            .then(response => response.data)
+    },
 }
