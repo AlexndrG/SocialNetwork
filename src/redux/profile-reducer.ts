@@ -133,9 +133,13 @@ export const setStatus = (status: string) => {
 
 
 export const updateStatus = (status: string) => async (dispatch: Dispatch) => {
-    const data = await profileAPI.updateStatus(status)
-    if (+data.resultCode === 0) {
-        dispatch(setStatus(status))
+    try {
+        const data = await profileAPI.updateStatus(status)
+        if (+data.resultCode === 0) {
+            dispatch(setStatus(status))
+        }
+    } catch (error) {
+        alert(error)
     }
 }
 

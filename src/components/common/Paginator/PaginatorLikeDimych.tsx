@@ -1,6 +1,6 @@
 import React from 'react';
 import s from './PaginatorLikeDimych.module.css';
-
+import cn from 'classnames';
 
 type PaginatorPropsType = {
     totalUserCount: number
@@ -28,17 +28,17 @@ export const PaginatorLikeDimych = ({totalUserCount, pageSize, currentPage, onPa
         <div className={s.paginator}>
             <button
                 onClick={() => onPageChanged(1)}
-                disabled={currentPage === 1}
+                disabled={!pagesCount || currentPage === 1}
             >First
             </button>
             <button
                 onClick={() => onPageChanged(pages[0] - 100)}
-                disabled={pages[0] - numOfButtons100 <= 0}
+                disabled={!pagesCount || pages[0] - numOfButtons100 <= 0}
             >Prev 100
             </button>
             <button
                 onClick={() => onPageChanged(pages[0] - 10)}
-                disabled={pages[0] - numOfButtons10 <= 0}
+                disabled={!pagesCount || pages[0] - numOfButtons10 <= 0}
             >Prev 10
             </button>
 
@@ -47,7 +47,8 @@ export const PaginatorLikeDimych = ({totalUserCount, pageSize, currentPage, onPa
                     pages.map(p =>
                         <div
                             key={p}
-                            className={s.page + ' ' + (currentPage === p ? s.selectedPage : '')}
+                            // className={s.page + ' ' + (currentPage === p ? s.selectedPage : '')}
+                            className={cn(s.page, {[s.selectedPage]: currentPage === p})}
                             onClick={(event) => onPageChanged(p)}>
                             {` ${p}`}
                         </div>
@@ -57,17 +58,17 @@ export const PaginatorLikeDimych = ({totalUserCount, pageSize, currentPage, onPa
 
             <button
                 onClick={() => onPageChanged(pages[0] + 10)}
-                disabled={pages[0] + numOfButtons10 > pagesCount}
+                disabled={!pagesCount || pages[0] + numOfButtons10 > pagesCount}
             >Next 10
             </button>
             <button
                 onClick={() => onPageChanged(pages[0] + 100)}
-                disabled={pages[0] + numOfButtons100 > pagesCount}
+                disabled={!pagesCount || pages[0] + numOfButtons100 > pagesCount}
             >Next 100
             </button>
             <button
                 onClick={() => onPageChanged(pagesCount)}
-                disabled={currentPage === pagesCount}
+                disabled={!pagesCount || currentPage === pagesCount}
             >Last
             </button>
         </div>

@@ -7,10 +7,12 @@ export const INITIALIZED_SUCCESS = 'INITIALIZED_SUCCESS'
 
 export type AppStateType = {
     initialized: boolean
+    globalError: string
 }
 
 const initialState: AppStateType = {
     initialized: false,
+    globalError: '',
 }
 
 

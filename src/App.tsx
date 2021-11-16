@@ -3,7 +3,7 @@ import './App.css';
 import {News} from './components/News/News';
 import {Music} from './components/Music/Music';
 import {Settings} from './components/Settings/Settings';
-import {HashRouter, Route, withRouter} from 'react-router-dom';
+import {HashRouter, Redirect, Route, Switch, withRouter} from 'react-router-dom';
 import {NavbarContainer} from './components/Navbar/NavbarContainer';
 import HeaderContainer from './components/Header/HeaderContainer';
 // import ProfileContainer from './components/Profile/ProfileContainer';
@@ -21,8 +21,17 @@ const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsCo
 const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileContainer'))
 
 class App extends React.Component<AppPropsType> {
+    catchAllUnhandledErrors = (promiseRejectionEvent: PromiseRejectionEvent) => {
+        alert('Some error!!!')
+    }
+
     componentDidMount() {
         this.props.initializeApp()
+        window.addEventListener('unhandledrejection', this.catchAllUnhandledErrors)
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('unhandledrejection', this.catchAllUnhandledErrors)
     }
 
     render() {
@@ -37,36 +46,25 @@ class App extends React.Component<AppPropsType> {
 
                 <div className='app-wrapper-content'>
 
-                    {/*<Route path='/dialogs' render={() => <DialogsContainer/>}/>*/}
-{/*
-                    <Route path='/dialogs' render={() => {
-                        return <Suspense fallback={<div>Loading...</div>}>
-                            <DialogsContainer/>
-                        </Suspense>
-                    }}/>
-*/}
-                    <Route path='/dialogs' render={withSuspense(DialogsContainer)}/>
+                    <Switch>
+                        {/*<Redirect exact from='/' to='/profile' />*/}
+                        <Route exact path='/' render={() => <Redirect to={'/profile'}/>}/>
 
+                        <Route path='/dialogs' render={withSuspense(DialogsContainer)}/>
 
-                    {/*<Route path='/profile/:userId?' render={() => <ProfileContainer/>}/>*/}
-{/*
-                    <Route path='/profile/:userId?' render={() => {
-                        return <Suspense fallback={<div>Loading...</div>}>
-                            <ProfileContainer/>
-                        </Suspense>
-                    }}/>
-*/}
-                    <Route path='/profile/:userId?' render={withSuspense(ProfileContainer)}/>
+                        <Route path='/profile/:userId?' render={withSuspense(ProfileContainer)}/>
 
+                        <Route path='/users' render={() => <UsersContainer/>}/>
 
+                        <Route path='/news' render={() => <News/>}/>
+                        <Route path='/music' render={() => <Music/>}/>
+                        <Route path='/settings' render={() => <Settings/>}/>
 
-                    <Route path='/users' render={() => <UsersContainer/>}/>
+                        <Route path='/login' render={() => <Login/>}/>
 
-                    <Route path='/news' render={() => <News/>}/>
-                    <Route path='/music' render={() => <Music/>}/>
-                    <Route path='/settings' render={() => <Settings/>}/>
+                        <Route path='*' render={() => <div>404 NOT FOUND</div>}/>
+                    </Switch>
 
-                    <Route path='/login' render={() => <Login/>}/>
                 </div>
             </div>
         )
