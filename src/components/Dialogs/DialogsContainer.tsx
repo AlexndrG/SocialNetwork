@@ -1,5 +1,5 @@
 import {connect} from 'react-redux';
-import {DialogsStateType, sendMessage} from '../../redux/dialogs-reducer';
+import {DialogsStateType, sendMessage, sendMessageTC} from '../../redux/dialogs-reducer';
 import {Dialogs} from './Dialogs';
 import {StateType} from '../../redux/redux-store';
 import {withAuthRedirect} from '../../hoc/withAuthRedirect';
@@ -12,7 +12,7 @@ type DialogsMapStateToPropsType = {
 }
 
 type DialogsMapDispatchToProps = {
-    sendMessage: (body: string) => void
+    sendMessageTC: (body: string) => void
     // updateNewMessageBody: (body: string) => void
 }
 
@@ -48,9 +48,17 @@ export const DialogsContainer = withAuthRedirect(
 )
 */
 
+/*
 const DialogsContainer = compose<ComponentType>(
     // connect(mapStateToProps, {sendMessage, updateNewMessageBody}),
     connect(mapStateToProps, {sendMessage}),
+    withAuthRedirect
+)(Dialogs)
+*/
+
+const DialogsContainer = compose<ComponentType>(
+    // connect(mapStateToProps, {sendMessage, updateNewMessageBody}),
+    connect(mapStateToProps, {sendMessageTC}),
     withAuthRedirect
 )(Dialogs)
 

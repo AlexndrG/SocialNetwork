@@ -1,4 +1,4 @@
-import {addPost, PostsDataType} from '../../../redux/profile-reducer';
+import {addPost, addPostTC, PostsDataType} from '../../../redux/profile-reducer';
 import {MyPosts} from './MyPosts';
 import {connect} from 'react-redux';
 import {StateType} from '../../../redux/redux-store';
@@ -10,7 +10,8 @@ type MyPostsMapStateToPropsType = {
 }
 
 type MyPostsMapDispatchToProps = {
-    addPost: (postText: string) => void
+    // addPost: (postText: string) => void
+    addPostTC: (postText: string) => void
     // updateNewPostText: (text: string) => void
 }
 
@@ -35,7 +36,14 @@ const mapStateToProps = (state: StateType): MyPostsMapStateToPropsType => {
 // }
 
 // export const MyPostsContainer = connect(mapStateToProps, mapDispatchToProps)(MyPosts)
+/*
 export const MyPostsContainer = connect(mapStateToProps,
     // {addPost, updateNewPostText})
     {addPost})
+(MyPosts)
+*/
+
+export const MyPostsContainer = connect(mapStateToProps,
+    // {addPost, updateNewPostText})
+    {addPostTC})
 (MyPosts)

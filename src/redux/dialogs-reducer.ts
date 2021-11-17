@@ -1,4 +1,6 @@
 import {ActionsTypes} from './redux-store';
+import {Dispatch} from 'redux';
+import {reset} from 'redux-form';
 
 
 export const SEND_MESSAGE = 'SEND-MESSAGE'
@@ -83,11 +85,11 @@ export const dialogsReducer = (state: DialogsStateType = initialState, action: A
 //         type: SEND_MESSAGE
 //     } as const
 // }
-export const sendMessage = (body:string) => {
-    return {
-        type: SEND_MESSAGE,
-        body,
-    } as const
+export const sendMessage = (body: string) => ({type: SEND_MESSAGE, body,} as const)
+
+export const sendMessageTC = (body: string) => (dispatch: Dispatch) => {
+    dispatch(sendMessage(body))
+    dispatch(reset('dialogAddMessageForm'))
 }
 
 // export const updateNewMessageBody = (text: string) => {

@@ -2,7 +2,7 @@ import {Dispatch} from 'redux';
 import {ActionsTypes, StateType} from './redux-store';
 import {PhotoData, profileAPI, usersAPI} from '../api/api';
 import {ProfileDataFormType} from '../components/Profile/ProfileInfo/ProfileDataForm';
-import {stopSubmit} from 'redux-form';
+import {reset, stopSubmit} from 'redux-form';
 
 export const ADD_POST = 'ADD-POST'
 export const DELETE_POST = 'DELETE-POST'
@@ -112,6 +112,11 @@ export const deletePost = (postId: number) => ({type: DELETE_POST, postId,} as c
 export const setUserProfile = (profile: ProfileDataType) => ({type: SET_USER_PROFILE, profile} as const)
 export const savePhotoSuccess = (photos: PhotoData) => ({type: SAVE_PHOTO_SUCCESS, photos} as const)
 
+
+export const addPostTC = (postText: string) => (dispatch: Dispatch) => {
+    dispatch(addPost(postText))
+    dispatch(reset('profileAddNewPostForm'))
+}
 
 export const getUserProfile = (userId: string) => async (dispatch: Dispatch) => {
     const data = await usersAPI.getProfile(userId)

@@ -19,9 +19,11 @@ const AddMessageForm: React.FC<InjectedFormProps<AddMessageFormDataType>> = (pro
             <div>
                 {/*<textarea placeholder={'Enter your message'} cols={50} rows={7}/>*/}
                 {/*<Field component={'textarea'} name={'newMessageBody'} placeholder={'Enter your message...'}*/}
-                <Field component={Textarea} name={'newMessageBody'} placeholder={'Enter your message...'}
-                       cols={50} rows={7}
-                       validate={[required, maxLength50]}
+                <Field
+                    autoFocus
+                    component={Textarea} name={'newMessageBody'} placeholder={'Enter your message...'}
+                    cols={50} rows={7}
+                    validate={[required, maxLength50]}
                 />
             </div>
             <div>
@@ -36,7 +38,7 @@ const AddMessageFormRedux = reduxForm<AddMessageFormDataType>({form: 'dialogAddM
 export const Dialogs = (props: DialogsPropsType) => {
     const addMessage = (values: AddMessageFormDataType) => {
         // console.log(values)
-        props.sendMessage(values.newMessageBody)
+        props.sendMessageTC(values.newMessageBody)
     }
 
     const state = props.dialogsPage
